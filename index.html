@@ -1,5 +1,5 @@
 <!--
-After removing the comments the file size is 184KB.
+After removing the comments the file size is 200KB.
 
 Copyright (c) 2025 Gyu‑min Jeon
 License: MIT-NC License (Non-Commercial)
@@ -334,8 +334,8 @@ This game and website are humanitarian public-interest prototypes.
 Unauthorized commercial redistribution is a violation of creator ethics
 and may result in legal action.
 
-Completed between August 9 and August 20, 2025 (Total: 120 hours).
-The website took 80 hours to build; the game took 40 hours.
+Completed between August 9 and August 23, 2025 (Total: 130 hours).
+The website took 90 hours to build; the game took 40 hours.
 
 You may freely use and share this open-source project with permission from the creator.
 Attribution is required. Free to use with proper credit.
@@ -479,7 +479,7 @@ Don’t steal what you’re freely allowed to honor.
       "@type": "Article",
       "@id": "https://mcorpai.org/#article",
       "headline": "Rights-based, Offline AI for Children with Disabilities and Refugee Self-Reliance",
-      "description": "A 44KB ultra-lightweight, rights-based offline AI designed to protect children with disabilities and enable refugee-led self-reliance.",
+      "description": "A 54kb ultra-lightweight, rights-based offline AI designed to protect children with disabilities and enable refugee-led self-reliance.",
       "inLanguage": "en",
       "author": { "@id": "https://mcorpai.org/#person" },
       "publisher": { "@id": "https://mcorpai.org/#org" },
@@ -530,19 +530,44 @@ Don’t steal what you’re freely allowed to honor.
   
   
   <style>
-    /* ===== Design tokens ===== */
-    :root{
-      --bg: #f5f7fb;
-      --paper: #ffffff;
-      --ink: #10243a;     /* deep ink */
-      --muted: #52667a;   /* muted text */
-      --line: #d7e2ee;    /* soft border */
-      --accent: #0b77d5;  /* brand blue */
-      --accent-weak:#eaf4ff;
-      --ok:#16a34a; --bad:#dc2626; --info:#2563eb;
-      --shadow: 0 10px 28px rgba(16,36,58,.07);
-      --radius: 16px;
-    }
+.brand-wrap{display:inline-flex;align-items:center;gap:10px}
+.mc-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  height:44px;padding:0 14px;
+  background:linear-gradient(180deg,#3d6dff,#2a56e6);
+  color:#fff;font-weight:800;
+  border:3px solid #4769ff;border-radius:10px;text-decoration:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.55),0 2px 10px rgba(0,0,0,.12);
+  text-shadow:0 1px 1px rgba(0,0,0,.25)
+}
+
+/* ===== Design tokens ===== */
+:root{
+  --badge-gap: 40px;  /* 배지와 글자 사이 간격 */
+
+  --bg: #f5f7fb;
+  --paper: #ffffff;
+  --ink: #10243a;     /* deep ink */
+  --muted: #52667a;   /* muted text */
+  --line: #d7e2ee;    /* soft border */
+  --accent: #0b77d5;  /* brand blue */
+  --accent-weak:#eaf4ff;
+  --ok:#16a34a; --bad:#dc2626; --info:#2563eb;
+  --shadow: 0 10px 28px rgba(16,36,58,.07);
+  --radius: 16px;
+}
+/* 변수 말고, 일반 규칙은 이렇게 따로 */
+.mc-badge{ white-space: nowrap; }
+nav .bar, .container.bar.card{ overflow: visible; }
+
+/* 배지를 왼쪽 바깥으로 빼는 규칙 */
+.brand-wrap.pull-left{ position: relative; padding-left: var(--badge-gap); }
+.brand-wrap.pull-left .mc-badge{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(calc(-100% - var(--badge-gap)), -50%);
+}
 
     /* ===== Global ===== */
     html{scroll-behavior:smooth}
@@ -684,11 +709,15 @@ Failure to credit the source may result in legal liability.
       
       
 <!-- 버전 1: 천천히 나타나는 감성 페이드인 -->
-<a href="#game-top" target="_self" style="text-decoration:none; color:inherit;"
-   title="👨 Folk Love: Disabled Children 🟩 No data is collected, Playable entirely offline 💎Game size: 48kb (1 emoji)"
-   aria-label="👨 Folk Love: Disabled Children 🟩 No data is collected, Playable entirely offline 💎Game size: 48kb (1 emoji)">
-  <span class="fade-in" style="color:blue;">👨 Father’s Heart, Ethical AI 🎅【Folk❤️Game】 </span>
-</a>
+<div class="brand-wrap pull-left">
+  <a href="https://mcorpai.org/" class="mc-badge" title="Ethical AI" aria-label="Ethical AI">Ethical AI</a>
+  <a href="#game-top" target="_self" style="text-decoration:none; color:inherit;"
+     title="👨 Folk Love: Disabled Children 🟩 No data is collected, Playable entirely offline 💎Game size: 48kb (1 emoji)"
+     aria-label="👨 Folk Love: Disabled Children 🟩 No data is collected, Playable entirely offline 💎Game size: 48kb (1 emoji)">
+    <span class="fade-in" style="color:blue;">👨 Father’s Heart, Ethical AI 🎅【Folk❤️Game】 </span>
+  </a>
+</div>
+
 
 
        
@@ -726,15 +755,15 @@ Failure to credit the source may result in legal liability.
     <h1 class="title">
  <a href="diplomacy(1).html" style="text-decoration:none;">
   <span style="color:black;">Not for Profit. Not for Data. Built for Dignity</span> 
-  <u style="color:#0b77d5;">【44kb Offline Ai Click】</u>
+  <u style="color:#0b77d5;">【54kb Offline Ai Click】</u>
 </a>
     </h1>
     <p class="subtitle"> This site is no larger than a single image and remains fully accessible even in low-connectivity or crisis-affected regions. </p> 
-    <p class="subtitle"> The 44KB ultra-lightweight, rights-based AI, developed in collaboration with GPT-5, has been designed as a sovereign AI—one that refugees, including those in low-income countries, can directly own and maintain. It presents a new AI model that not only protects children with disabilities but also supports both citizens of low-income nations and refugees in achieving self-reliance. </p>
-    <p class="subtitle"> With as little as USD 1,000, solar power and low-cost chipsets can establish an AI-enabled protection infrastructure within refugee camps. For future iterations, genuine collaboration with human expertise, not only GPT, will remain essential. It is designed as one of the most rigorously ethical AI models, in full compliance with UNCRC, CRPD, and GDPR (with particular emphasis on complete adherence to GDPR).</p>
+    <p class="subtitle"> The 54kb ultra-lightweight, rights-based AI has been designed as a sovereign AI—one that refugees, including those in low-income countries, can directly own and maintain. It presents a new AI model that not only protects children with disabilities but also supports both citizens of low-income nations and refugees in achieving self-reliance. </p>
+    <p class="subtitle"> With modest resources—approximately USD 1,000—solar power and affordable chipsets can support the establishment of an AI-enabled protection infrastructure within refugee camps. Looking ahead, meaningful collaboration with human expertise, alongside technological tools such as GPT, will remain essential. The model has been designed with a strong ethical foundation, ensuring full compliance with UNCRC, CRPD, and GDPR, with particular attention to robust adherence to GDPR principles. </p>
     <p class="subtitle"> Ultra-low-cost, lightweight AI provides practical tools to address urgent challenges in refugee camps. It can detect violence among refugees in real time, safeguard vulnerable groups such as women and children, identify medical emergencies at an early stage, and promote fairness in food distribution. </p>
-   <p class="subtitle"> By enabling rapid detection, timely alerts, and transparent record-keeping, this model strengthens both human rights protection and community safety. If desired, I would be pleased to provide a clear and accessible explanation of the 44KB offline AI and how it works. Please feel free to reach out. </p>
-   <p class="meta"> 44KB Offline AI (Emoji AI) · Gyu-min Jeon (Republic of Korea) · With sincere respect, I would be grateful for your kind attention. </p>
+   <p class="subtitle"> By enabling rapid detection, timely alerts, and transparent record-keeping, this model strengthens both human rights protection and community safety. If desired, I would be pleased to provide a clear and accessible explanation of the 54kb offline AI and how it works. Please feel free to reach out. </p>
+   <p class="meta"> 54kb Offline AI (Emoji AI) · Gyu-min Jeon (Republic of Korea) · With sincere respect, I would be grateful for your kind attention. </p>
   </div>
 </header>
 
@@ -746,8 +775,8 @@ Failure to credit the source may result in legal liability.
   <div class="diplom-wrap">
     <section class="diplom blue" aria-label="Diplomatic request">
       <p><strong>Requesting </strong> a five-minute briefing and your permission to circulate the <strong> 11-page </strong> executive summary. </p>
-      <p><strong> Your Excellency, </strong> I would be grateful for a brief opportunity to present a concise approach to supporting children with disabilities and advancing refugee self-reliance. With your permission, I will deliver a five-minute overview. This initiative has been noted by GIZ (Germany) and is under future review at SIDA (Sweden), underscoring its alignment with inclusive, ethical technology. To our knowledge, it is among the earliest humanitarian AI models designed not to compete with Big Tech, but to protect children with disabilities and empower refugees—and it can be field-proven with only USD 1,000. </p>
-      <p> With your kind consideration, the entire website can be reviewed in under five minutes. It was conceived and developed solely by me, without institutional affiliation, external support, or organizational ties. I remain an independent actor committed to humanitarian ethics. </p>
+      <p><strong> Your Excellency, </strong> I would be grateful for a brief opportunity to present a concise approach to supporting children with disabilities and advancing refugee self-reliance. With your permission, I will provide a five-minute overview. This initiative has been noted by GIZ (Germany) and introduced to SIDA (Sweden) for consideration, reflecting its alignment with inclusive and ethical technology. To our knowledge, it represents one of the earliest humanitarian AI models developed as an independent effort to protect children with disabilities and empower refugees—and it can be piloted and field-tested with modest resources. </p>
+      <p> With your kind consideration, the entire website can be reviewed in under five minutes. The project was conceived and developed entirely by an independent developer, without institutional affiliation, external support, or organizational ties. The independent developer remains committed to a foundation of humanitarian ethics. </p>
       <p class="meta">For EU missions and UK posts: the model is designed to align with CRPD/UNCRC priorities and GDPR-oriented privacy expectations; all materials are non-commercial and rights-based.</p>
     </section>
   </div>
@@ -1021,7 +1050,7 @@ Should you seek a precise and in-depth understanding of the foundational princip
     <section id="contact" class="card" aria-labelledby="contactTitle">
       <h2 id="contactTitle">Contact🤝Partnerships always welcome! Free partnerships available.</h2>
       <p>👨We can provide the 260‑page technical dossier upon request, By joining Folk❤️Game, 100% free partnerships are available.</p>
-      <p>Email: <a href="mailto:gyumin.jeon.childsafe@gmail.com">gyumin.jeon.childsafe@gmail.com</a> · Backup: <a href="mailto:jekymin8232@gmail.com" rel="noopener noreferrer">jekymin8232@gmail.com</a></p>
+      <p> Official email : <a href="mailto:contact@mcorpai.org"> ✉️ contact@mcorpai.org </a> Backup email (personal) 📧 gyumin.jeon.childsafe@gmail.com </p>
       <p class="meta"> Compliance note: The language here is intentionally phrased to reflect the design intent — that the system is structured to align with compliance principles and does not collect personal data. Final policies will be confirmed in consultation with implementing partners.</p>
     </section>
   </main>
@@ -1737,8 +1766,8 @@ This game and website are humanitarian public-interest prototypes.
 Unauthorized commercial redistribution is a violation of creator ethics
 and may result in legal action.
 
-Completed between August 9 and August 20, 2025 (Total: 120 hours).
-The website took 80 hours to build; the game took 40 hours.
+Completed between August 9 and August 23, 2025 (Total: 130 hours).
+The website took 90 hours to build; the game took 40 hours.
 
 You may freely use and share this open-source project with permission from the creator.
 Attribution is required. Free to use with proper credit.
@@ -2704,7 +2733,7 @@ function updateTotalScore(delta){
 <!-- 
   
   ========================= Ending=========================
-1985 슈퍼마리오 vs 44kb 러너 – 두 시대의 한계 돌파
+1985 슈퍼마리오 vs 54kb 러너 – 두 시대의 한계 돌파
 
   오로지 기획력으로 승부를 봤습니다. 
   제가 한 것은 아이디어 구성+ 게임 디자인+기획력+버그 수정+밸런스 조정+게임 통합 구성+극한의 효율은 제가 전부 다 했습니다.
@@ -2712,11 +2741,11 @@ function updateTotalScore(delta){
 
 1985년, 슈퍼마리오는 40KB의 카트리지에 고정된 32개의 스테이지, 파워업, 적 AI, 배경 스크롤을 담아 ‘게임 디자인의 교과서’가 되었습니다. 당시 기술 한계를 극복한 창의성과 완성도로 역사에 남았습니다.
 
-2025년, 44kb 러너는 브라우저에서 즉시 실행되며, 이미지 한 장보다 작은 용량에 난이도 스케일링, 다중 아이템, 랜덤 이벤트, 부활 시스템, 배경 전환, 사운드를 전부 담았습니다. 
+2025년, 54kb 러너는 브라우저에서 즉시 실행되며, 이미지 한 장보다 작은 용량에 난이도 스케일링, 다중 아이템, 랜덤 이벤트, 부활 시스템, 배경 전환, 사운드를 전부 담았습니다. 
   고정 스테이지 대신 매번 다른 조합이 등장해, 한 번 클리어해도 새로운 도전이 계속됩니다.
 
-슈퍼마리오가 하드웨어 한계 속에서 최대치를 끌어낸 사례라면, 44kb 러너는 현대 웹 환경에서 극한 경량화와 시스템 밀도를 동시에 달성한 사례입니다. 
-  둘 다 각 시대의 ‘작은 용량으로 큰 경험을 만든 기념비적 게임’이지만, 44kb 러너는 무한 변주성과 즉시 접근성, 그리고 제작 효율성에서 새로운 가능성을 보여줍니다.
+슈퍼마리오가 하드웨어 한계 속에서 최대치를 끌어낸 사례라면, 54kb 러너는 현대 웹 환경에서 극한 경량화와 시스템 밀도를 동시에 달성한 사례입니다. 
+  둘 다 각 시대의 ‘작은 용량으로 큰 경험을 만든 기념비적 게임’이지만, 54kb 러너는 무한 변주성과 즉시 접근성, 그리고 제작 효율성에서 새로운 가능성을 보여줍니다.
 
 이 게임은 과거의 슈퍼마리오가 상징했던 “작지만 완벽한 재미”를, 오늘날 누구나 접속 가능한 웹에서 재해석한 결과물입니다. 
   제약은 한계를 만드는 것이 아니라, 창의성을 폭발시키는 무대가 될 수 있다는 증거입니다.
@@ -2913,8 +2942,8 @@ In conclusion, M‑Corp is a civilian‑driven, ethically coherent, and operatio
   </p>
   
 <p style="font-size:0.8rem; color:#2563eb; text-align:center; margin-top:24px;">
-  258 KB total (with comments) — No external libraries • Offline-ready • Solo-built in 120 hours with AI collaboration <br>
-  Only 184KB (no comments); loads in seconds even on unstable 2G (10–50 KB/s)📡
+  266 KB total (with comments) — No external libraries • Offline-ready • Solo-built in 130 hours with AI collaboration <br>
+  Only 200KB (no comments); loads in seconds even on unstable 2G (10–50 KB/s)📡
 </p>
 
 
@@ -2929,89 +2958,52 @@ In conclusion, M‑Corp is a civilian‑driven, ethically coherent, and operatio
 Vanilla HTML Offline AI DEMO — Version 0.3
 Human–GPT-5 Collaboration
 Founder: Gyumin Jeon (English name: Morgan J) — https://mcorpai.org/
+   
+It is 54KB excluding comments. 
+   -->
 
-  44KB excluding comment descriptions
+<!--
+54KB HTML
+1. k-NN AI
+2. RLS AI
+3. Thompson Sampling AI
 
+First, this system is a **lightweight offline AI demo** that displays country-level safety and travel risk. It combines two machine-learning methods, 
+`k-NN` (k-nearest neighbors) and `RLS` (Recursive Least Squares). Each country is represented by features such as cost, language difficulty, currency exchange, risk keywords, 
+and credit ratings. These are turned into vectors, and the AI predicts safety grades using similarity (k-NN) and regression adaptation (RLS).
 
-Vanilla HTML Offline AI is a single-file, self-contained AI demo built entirely with plain HTML, CSS, and JavaScript, requiring no servers, no libraries, and no internet connection.
+Second, `k-NN` works by finding countries with similar characteristics and averaging their safety grades to make predictions. For example, if a country has similar costs,
+language difficulty, and crime patterns to its neighbors, the model infers its safety level from those neighbors.
 
-This file is a fully self-contained offline demo, built as a single HTML document that includes both style and script, without relying on any external libraries or network calls. 
-  An information card is displayed at the bottom-left or in a fixed left rail, while the header provides internal document links and guidance notes.
-When a user types a country name into the input field, the system provides datalist auto-completion and fuzzy matching to locate the country. 
-  Alongside the input are buttons for cycling through high-risk countries and toggling a simple AI mode. The rendering area displays, in order, the country name, 
-  ranking, safety grade, summary description, and additional details. A dedicated screen-reader region is also included for accessibility.
+Third, `RLS` is an online regression learner. Each new observation updates the model’s weights and covariance matrix, allowing it to adapt rapidly. As more data are seen, 
+predictions for those countries stabilize, while new entries are quickly absorbed. A forgetting factor (half-life) ensures that old data lose influence and recent data dominate the model.
 
-The data model is organized into three parts. First, pipe-delimited text is parsed into an array containing each country’s name, rank, safety level, cost tier, English proficiency, 
-  currency-exchange difficulty, representative risks, and travel tips. A parser converts these entries into objects to build the internal database. Second, a separate array holds micronations,
-  keeping them distinct from recognized countries. Third, additional constants store a food recommendation dictionary, a credit rating map, and explanations for safety grades. 
-  The database registers all UN member states as strings; if a country lacks data, a default “restricted information” object is automatically generated, ensuring consistent search coverage.
+Fourth, a **probabilistic decision-making AI** based on the Beta-Bernoulli posterior is added. Each country’s malaria risk is modeled as binary outcomes: “detected” or “not detected.”
+Initially, risk is represented by a neutral Beta(1,1) prior. Each detection increments the success count, each non-detection increments the failure count, producing a posterior Beta(1+s, 1+f). 
+The mean (1+s)/(2+s+f) directly gives the risk probability as a percentage. Using Thompson Sampling, the AI draws samples from this posterior; if a sampled probability exceeds a threshold, 
+it displays a “Caution” badge. Mosquito counts slightly increase the success weight, while old data are discounted with time decay.
 
-Search and matching are handled through accent stripping, lowercase normalization, and trigram Jaccard similarity. Common aliases such as “UK,” “Britain,” and “United Kingdom,” 
-  as well as “Korea” and “South Korea,” are pre-mapped. If the similarity score falls below a threshold, the match is withheld to reduce false positives. 
-  Display text and colors are updated dynamically based on safety and credit levels, and badge colors are computed through simple rules.
+Fifth, these three engines represent different paradigms of intelligence:
 
-The layout measures each card’s height to calculate collapsed and expanded states. 
-  Long content remains collapsed until hovered, at which point it expands. A ResizeObserver tracks dimension changes, while an IntersectionObserver tracks viewport entry to start or stop auto-rotation.
-  The auto-rotation alternates between safe countries and high-risk countries, and pauses temporarily when the user interacts with the input. 
-  The most recently selected country is stored in localStorage as a single string, restored after refresh, and also reflected in the URL query for bookmarking.
+* **k-NN**: case-based reasoning through similarity.
+* **RLS**: adaptive regression that learns continuous signals in real time.
+* **Beta-Bernoulli + Thompson Sampling**: probabilistic decision-making that balances exploration and exploitation automatically.
 
-A lightweight on-device AI component is included. It constructs a feature vector by combining cost level, English proficiency, exchange difficulty, credit score, and one-hot encoded risk categories.
-  Predictions are made via cosine similarity neighbor search. An online learner updates low-dimensional regression coefficients using a recursive least-squares scheme with a forgetting factor. 
-  The outputs are blended into a weighted score, and the system displays the estimated grade, rationale summary, neighbor info, and confidence in an AI note panel.
-  This function runs entirely in browser memory, requires no network access, and can be toggled on or off with a button.
+With few observations, uncertainty is high and the system explores more. As samples accumulate, the posterior sharpens and the AI exploits more confidently. 
+This makes it look like a decision-making AI that learns from data.
 
-Model coefficients are updated only when the user queries items with existing ratings, and reset when the session ends. A supplemental patch script enhances labeling for restricted-information countries. 
-  Those in a flagged list receive auxiliary labels such as “travel warning,” “stability estimate,” or “caution advised,” which update the title and option labels accordingly. 
-  If information is limited, a single advisory note is inserted into the “read more” area directing users to official travel advisories. 
-  At the bottom, a persistent ticker provides a simple external link to the project’s introduction page.
+**In summary**, inside this single HTML page, three distinct AI engines operate side by side:
 
-This file does not include microphone access, location services, Bluetooth, Service Workers, IndexedDB, or mesh networking. 
-  It collects no sensor input, transmits no data externally, and performs no network calls whatsoever.
+1. k-NN for similarity-based prediction.
+2. RLS for online adaptive regression.
+3. Beta-Bernoulli with Thompson Sampling for probabilistic decision-making.
 
-○ If large datasets or long-running computations are required, extensions such as worker separation, persistent storage, or file import would need to be designed separately.
-  These features are not implemented in this build.
-
-● The AI engine is modular. The k-NN classifier, lightweight RLS update logic, and vectorization utilities are organized as independent functions and constant sets,
-  making it easy to replace or extend specific parts. For example, adding new risk categories or changing the scoring transformation can be done by modifying a single module.
-
-The user interface and the core logic are clearly separated. The control panel with the search box and buttons, the view area that renders results, 
-  and the AI note renderer all exist independently. This separation makes it possible to add new features or redesign the interface without rewriting the entire codebase.
-
-● The update process is simple. Since there is no server, updating is as easy as replacing or editing the HTML Offline AI file. Distribution can be done via email attachment or USB copy.
-
-● User-driven data editing is supported at the file level. Because the data is stored in simple arrays and dictionaries, even non-experts can open the file and add or modify entries.
-
-○ The current build does not include runtime CSV import or an editing UI, but such features could be added later as separate modules.
-
-Versioning Roadmap
-
-First, Version 0.1.
-This is a proof of concept (PoC) or demo stage. As with the current version, it is a single-file build containing only minimal functionality, 
-  with the purpose of demonstrating that “it actually runs.” As long as the core logic executes, the data structures exist, and the basic UI is present,
-  that is sufficient. Instability and bugs are acceptable at this stage. The goal is demonstration and feasibility validation.
-
-Second, Versions 0.2 to 0.5.
-This is the experimental feature expansion stage. The dataset is expanded, UI interactions are enriched, and the basic AI engine (k-NN, RLS, etc.) is stabilized.
-  Features such as CSV import, additional risk categories, or simple visualizations may be introduced. User feedback is the main driver in this stage.
-
-Third, Versions 0.6 to 0.9.
-This is the beta (pre-release) stage. All core features should be implemented, and the system should be structurally stable. Work in this stage focuses on refactoring, 
-  performance optimization, removing redundancy, and standardizing data structures. Documentation begins here, and external testers provide feedback. 
-  Version 0.9 usually indicates “nearly release-ready, but under final review.”
-
-Fourth, Version 1.0.
-This is the stable release. Functionality, stability, and documentation meet the minimum threshold for general use. 
-  A typical user should be able to download the file and run it without issues. The overall structure of the UI, data model, and AI logic should be fixed, 
-  with subsequent improvements delivered incrementally (e.g., 1.1, 1.2, etc.).
-
-  Vanilla HTML Offline AI DEMO — Current Version 0.3
+Together, they transform a simple offline demo into an AI that not only makes predictions but also 
+**learns, updates, and changes its decisions in real time**—all without servers or external data.
 
 -->
 
 
-  
-
-<!-- Paste this inside <body>. No outer <html>/<head>/<body> wrappers. -->
 <style>
 :root{color-scheme:light dark}
 /* --- Layout for the floating rail --- */
@@ -3050,7 +3042,7 @@ This is the stable release. Functionality, stability, and documentation meet the
   <div id="box" role="group">
     <header>
       <div class="title" id="title">
-        <a href="diplomacy(1).html" style="color:#0b77d5;text-decoration:underline">44kb Offline AI click</a>
+        <a href="diplomacy(1).html" style="color:#0b77d5;text-decoration:underline">54kb Offline AI click</a>
       </div>
       <div id="period">A world-class, ultra-lightweight on-device k-NN AI demo</div>
     </header>
@@ -3218,7 +3210,7 @@ This is the stable release. Functionality, stability, and documentation meet the
   const elN=document.getElementById('name'),elR=document.getElementById('rank'),elG=document.getElementById('grade'),elD=document.getElementById('desc'),elM=document.getElementById('more'),sr=document.getElementById('sr'),view=document.getElementById('view');
 
   // ==================== LABELS ====================
-  const LABELS={title:'44kb Offline AI click',moody:"Moody\'s 5yr avg",placeholder:'Country… (ex. America or USA)',risk:'Risk',choose:'Choose a country or press Risk.',sgrade:'Safety Grade',rank:'Tourism Rank #',micro:'Micronation',notun:'not a UN state',ai:'AI (k-NN + RLS) suggestion'};
+  const LABELS={title:'54kb Offline AI click',moody:"Moody\'s 5yr avg",placeholder:'Country… (ex. America or USA)',risk:'Risk',choose:'Choose a country or press Risk.',sgrade:'Safety Grade',rank:'Tourism Rank #',micro:'Micronation',notun:'not a UN state',ai:'AI (k-NN + RLS) suggestion'};
   elT.innerHTML=`<a href="diplomacy(1).html" style="color:#0b77d5;text-decoration:underline">${LABELS.title}</a>`;
   q.setAttribute('placeholder',LABELS.placeholder);
   riskBtn.textContent=LABELS.risk;
@@ -3433,27 +3425,273 @@ This is the stable release. Functionality, stability, and documentation meet the
 <!-- ADVISORY PATCH END -->
 
 
+<!--
+
+"Beta-Bernoulli posterior probabilistic decision AI" is a Bayesian model
+that updates its estimate of malaria risk as more binary observations
+("Detected" vs. "Not detected") are collected. Decisions are then made
+according to these updated probabilities in an online-learning bandit
+framework (Thompson Sampling).
+
+1. Problem framing:
+Each country is treated as a Bernoulli process: repeated trials with outcomes
+"Detected" or "Not detected". The unknown malaria risk is θ. Before any data,
+θ is assumed to follow a Beta(α, β) distribution. Beta is the conjugate prior
+for Bernoulli, so when observations arrive, the posterior remains Beta-shaped
+and updates cleanly.
+
+2. Learning and updating:
+Initially, α=1 and β=1 are set for a neutral prior. If we observe s detections
+and f non-detections, the posterior is Beta(α+s, β+f). The posterior mean
+(expected risk) is (1+s) / (2+s+f). This gives an immediate percentage risk.
+With Thompson Sampling, at each decision step we draw θ ~ Beta(α+s, β+f),
+and if θ exceeds a threshold, we choose an action such as showing "Caution".
+This balances exploration and exploitation naturally.
+
+3. Context and weighting:
+Instead of using s and f alone, contextual features like mosquito count can
+adjust the update. For example, if mosquito count is 10, a capped boost of 0.5
+is added to s (so s += 1.5). This reflects observation strength without runaway
+effects. Time decay is also applied: older records are down-weighted with a
+half-life schedule, ensuring responsiveness to recent data.
+
+4. Contrast with k-NN and RLS:
+- k-NN: finds similar countries and bases predictions on neighbors
+- RLS: continuously adapts regression weights to fit numerical signals
+- Beta-Bernoulli: models uncertainty directly. With few samples, the posterior
+  is wide → more exploration. With more samples, the posterior sharpens → more
+  exploitation. This automatic shift is what makes it a true "decision-making AI".
+
+5. Demonstration impact:
+Even a handful of inputs instantly change the posterior risk and sample count.
+Once thresholds are passed, a caution badge appears or disappears. This shows
+online learning, adaptation, and decision updates all in real time—entirely
+offline, using only HTML/JS, with statistics stored locally. Viewers clearly
+see "an offline AI that learns and changes its decisions."
+
+In summary, this is a probabilistic decision-making online learning AI,
+implementing Thompson Sampling with a Beta-Bernoulli posterior. Each
+observation updates the success/failure counts; actions are chosen by
+posterior sampling or by using the posterior mean to update UI risk values.
+
+-->
 
 
+
+
+<!-- 신규 추가 스니펫 -->
+<script>
+(function(){
+  'use strict';
+
+  // ==================== 신규: 상단 배치 전용 스타일 주입 ====================
+  (function injectStyle(){
+    if(document.getElementById('mm-top-style')) return;
+    const css=`
+#name .mosq-btn{display:none!important}
+#mm-top-btn{position:fixed;left:14px;top:110px;z-index:10003;font-size:.82rem;font-weight:800;border-radius:999px;padding:4px 10px;border:1px solid rgba(0,0,0,.12);background:#ffffff;color:#0b1221;box-shadow:0 4px 10px rgba(2,6,23,.12);cursor:pointer}
+#mm-top-btn .label{margin-left:4px}
+#mm-top-btn .mosq-tag{display:none;margin-left:6px;padding:0 6px;border:1px solid #ffc9c9;background:#ffe9e9;color:#7a2a2a;border-radius:999px;font-weight:900;font-size:.62rem}
+#mm-top-btn.warn .mosq-tag{display:inline-block;animation:pulse .3s ease-out 1}
+@keyframes pulse{0%{transform:scale(.9)}100%{transform:scale(1)}}
+#mm-pop-fixed{position:fixed;z-index:10004;max-width:360px;background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:12px;box-shadow:0 12px 28px rgba(2,6,23,.16);padding:10px;color:#0b1221;display:none}
+#mm-pop-fixed h3{margin:0 0 6px 0;font-size:.9rem}
+#mm-pop-fixed label{display:block;font-size:.8rem;margin-top:6px}
+#mm-pop-fixed input[type="number"]{width:100%;padding:4px 6px;border:1px solid rgba(0,0,0,.16);border-radius:8px}
+#mm-pop-fixed .row{display:flex;gap:8px;margin-top:8px}
+#mm-pop-fixed .row button{font-size:.75rem;padding:4px 8px;border-radius:8px;border:1px solid rgba(0,0,0,.16);cursor:pointer}
+#mm-save{background:#e6f4ff;border-color:#9ad1f3}
+#mm-close{background:#ffecec;border-color:#ffc9c9}
+#mmhelp{font-size:.72rem;opacity:.8;margin-top:6px}
+    `.trim();
+    const st=document.createElement('style');
+    st.id='mm-top-style';
+    st.textContent=css;
+    (document.head||document.documentElement).appendChild(st);
+  })();
+
+  // ==================== 신규: 안전 저장소 폴백 ====================
+  // 필요 시 sessionStorage로 바꾸면 창을 완전히 닫을 때까지로 수명이 제한됩니다.
+  const store=(function(){
+    try{
+      const k='__mmtest__'; localStorage.setItem(k,'1'); localStorage.removeItem(k);
+      return localStorage; // 여기를 sessionStorage로 바꾸면 세션 보존으로 동작합니다.
+    }catch(_){
+      const m={}; return {getItem:k=>m[k]||null,setItem:(k,v)=>m[k]=String(v),removeItem:k=>delete m[k]};
+    }
+  })();
+
+  // ==================== 신규: 하이퍼파라미터 ====================
+  const KEY='malaria.mm.v1';
+  const MIN_SAMPLES=3;
+  const CAUTION_THRESHOLD=0.65;
+  const HALFLIFE_DAYS=180;
+
+  // ==================== 신규: 유틸 ====================
+  const rail=()=>document.getElementById('infoRail');
+  const nameEl=()=>document.getElementById('name');
+  const base=s=>String(s||'').replace(/\s*\(.*?\)\s*$/,'').trim();
+  const now=()=>Date.now();
+  const load=()=>{try{return JSON.parse(store.getItem(KEY)||'{}')}catch(_){return{}}};
+  const save=o=>{try{store.setItem(KEY,JSON.stringify(o))}catch(_){}};
+
+  function decay(rec){
+    if(!rec||!rec.t) return {s:0,f:0,t:now()};
+    const days=(now()-rec.t)/(1000*60*60*24);
+    const f=Math.pow(0.5,Math.max(0,days)/HALFLIFE_DAYS);
+    return {s:(rec.s||0)*f, f:(rec.f||0)*f, t:now()};
+  }
+
+  function posterior(country){
+    const d=load();
+    const r=decay(d[country]||{s:0,f:0,t:now()});
+    const a=1+(r.s||0), b=1+(r.f||0);
+    return {p:a/(a+b), a, b};
+  }
+
+  function record(country,{detected,count}){
+    const d=load();
+    const prev=decay(d[country]||{s:0,f:0,t:now()}); // 기록 직전에 감쇠를 먼저 적용합니다.
+    let s=prev.s||0, f=prev.f||0;
+
+    const n=Number.isFinite(Number(count)) ? Math.max(0, Number(count)) : 0;
+    const boost=Math.min(0.5, n/20); // 모기 수 가중치 상한은 0.5입니다.
+
+    if(detected){ s += 1 + boost; } else { f += 1; }
+
+    d[country]={s,f,t:now()};
+    save(d);
+
+    const a=1+s, b=1+f;
+    return {p:a/(a+b), a, b};
+  }
+
+  // ==================== 신규: 상단 버튼 생성 및 배치 ====================
+  const topBtn=document.createElement('button');
+  topBtn.id='mm-top-btn';
+  topBtn.type='button';
+  topBtn.setAttribute('aria-label','Open Malaria Meter');
+  topBtn.innerHTML='🦟<span class="label">Malaria detector</span><span class="mosq-tag">Caution</span>';
+  document.body.appendChild(topBtn);
+
+  function placeTopBtn(){
+    const r=(rail()||document.body).getBoundingClientRect();
+    const left=Math.max(8, r.left||14);
+    const top=Math.max(8, (r.top||150) - 28);
+    topBtn.style.left=left+'px';
+    topBtn.style.top=top+'px';
+  }
+  window.addEventListener('scroll',placeTopBtn,{passive:true});
+  window.addEventListener('resize',placeTopBtn);
+  placeTopBtn();
+
+  // ==================== 신규: 팝업(고정, 카드 위로 겹치지 않음) ====================
+  const pop=document.createElement('div'); pop.id='mm-pop-fixed';
+  pop.innerHTML='<h3>Malaria Meter</h3>'
+    + '<label><input type="radio" name="mmstat" value="1"> Detected</label>'
+    + '<label><input type="radio" name="mmstat" value="0" checked> Not detected</label>'
+    + '<label>Mosquito count (optional) <input id="mmcount" type="number" min="0" step="1" placeholder="Leave blank if unknown"></label>'
+    + '<div class="row"><button id="mm-save">Save</button><button id="mm-close">Close</button><button id="mm-reset" title="Clear this country">Reset</button></div>'
+    + '<div id="mm-out" style="margin-top:6px;font-size:.78rem;opacity:.9"></div>'
+    + '<div id="mmhelp">Important: Malaria risk varies by region. Vaccines exist but availability can be limited and do not replace prevention (nets, repellents, chemoprophylaxis). This tool is not medical advice.</div>'
+    + '<div style="margin-top:4px;font-size:.78rem;color:#0b77d5">Beta-Bernoulli posterior probabilistic decision AI</div>';
+  document.body.appendChild(pop);
+
+  function anchorPopAboveRail(){
+    const r=(rail()||document.body).getBoundingClientRect();
+    const vw=window.innerWidth; const pw=Math.min(360, vw-24);
+    pop.style.maxWidth=pw+'px';
+    const left=Math.max(8, Math.min(vw-pw-8, r.left));
+    pop.style.left=left+'px';
+    const top=Math.max(8, r.top - pop.offsetHeight - 12);
+    pop.style.top=top+'px';
+  }
+
+  function openPop(){
+    const nm=base(nameEl()?.textContent||'');
+    const r=posterior(nm);
+    document.getElementById('mm-out').textContent = r ? ('Posterior risk '+Math.round(r.p*100)+'% with '+Math.round(r.a+r.b-2)+' samples.') : '';
+    document.getElementById('mmcount').value='';
+    pop.style.display='block';
+    anchorPopAboveRail();
+  }
+  function closePop(){ pop.style.display='none'; }
+
+  topBtn.addEventListener('click',function(e){ e.stopPropagation(); openPop(); });
+  document.getElementById('mm-close').addEventListener('click',closePop);
+  document.addEventListener('click',function(e){
+    if(pop.style.display==='none') return;
+    if(!pop.contains(e.target) && e.target!==topBtn) closePop();
+  });
+
+  document.getElementById('mm-save').addEventListener('click',function(){
+    const nm=base(nameEl()?.textContent||''); if(!nm) return;
+    const detected=(pop.querySelector('input[name="mmstat"]:checked')||{}).value==='1';
+    const cnt=Number(document.getElementById('mmcount').value||'');
+    const res=record(nm,{detected,count:cnt});
+    document.getElementById('mm-out').textContent='Posterior risk '+Math.round(res.p*100)+'% with '+Math.round(res.a+res.b-2)+' samples.';
+    updateBadge();
+  });
+
+  document.getElementById('mm-reset').addEventListener('click',function(){
+    const nm=base(nameEl()?.textContent||''); if(!nm) return;
+    const d=load(); delete d[nm]; save(d);
+    document.getElementById('mm-out').textContent='Reset complete.';
+    updateBadge();
+  });
+
+  // ==================== 신규: 배지 갱신 및 이름 변화 감시 ====================
+  function updateBadge(){
+    const nm=base(nameEl()?.textContent||''); if(!nm) return;
+    const r=posterior(nm); const tag=topBtn.querySelector('.mosq-tag');
+    if(r && r.p>=CAUTION_THRESHOLD && r.a+r.b-2>=MIN_SAMPLES){ topBtn.classList.add('warn'); tag.textContent='Caution'; }
+    else{ topBtn.classList.remove('warn'); }
+  }
+  if(nameEl()){
+    const mo=new MutationObserver(function(){ updateBadge(); placeTopBtn(); });
+    mo.observe(nameEl(),{childList:true,characterData:true,subtree:true});
+  }
+
+  // ==================== 신규: 초기 안정화 ====================
+  (function bootstrap(){
+    let k=0;
+    const id=setInterval(()=>{placeTopBtn(); updateBadge(); if(++k>10) clearInterval(id)},120);
+  })();
+
+  // ==================== 신규: 간단 검증 로그 ====================
+  (function sanity(){
+    try{
+      const t='__MM_TEST__';
+      const a=posterior(t).p;
+      const b=record(t,{detected:true,count:10}).p; // 최대 가중치 적용
+      const c=record(t,{detected:false,count:0}).p;
+      if(!(a>=0 && b>a && c<b)) console.warn('[Malaria Meter] update order check failed');
+    }catch(err){ console.warn('[Malaria Meter] self-check warn',err); }
+  })();
+
+})();
+</script>
+
+   
 <!--
 
 Below are **surgical copy/paste patches** that transform `world_travel.html` 
-  into a refugee‑camp safety mini‑AI (≈44kb). Each patch is in the form **Original ▶ Replace with**. Search the “Original” block in your file, then replace it with the “Replace with” block.
+  into a refugee‑camp safety mini‑AI (≈54kb). Each patch is in the form **Original ▶ Replace with**. Search the “Original” block in your file, then replace it with the “Replace with” block.
 
 ---
 
-## Patch 1 — Header title (44KB) and purpose line
+## Patch 1 — Header title (54kb) and purpose line
 
 **Original (search this small fragment inside the `<header>`):**
 
 ```html
-<a href="diplomacy.html" style="color:#0b77d5;text-decoration:underline">44KB Offline AI click</a>
+<a href="diplomacy.html" style="color:#0b77d5;text-decoration:underline">54kb Offline AI click</a>
 ```
 
 **Replace with:**
 
 ```html
-<a href="diplomacy.html" style="color:#0b77d5;text-decoration:underline">44KB Offline Camp‑Safety AI</a>
+<a href="diplomacy.html" style="color:#0b77d5;text-decoration:underline">54kb Offline Camp‑Safety AI</a>
 ```
 
 **Original (the line right below it shows a tagline):**
@@ -3465,7 +3703,7 @@ Below are **surgical copy/paste patches** that transform `world_travel.html`
 **Replace with:**
 
 ```html
-<div id="period">Offline ≈44kb camp‑safety mini‑AI (k‑NN + RLS), privacy‑first</div>
+<div id="period">Offline ≈54kb camp‑safety mini‑AI (k‑NN + RLS), privacy‑first</div>
 ```
 
 ---
@@ -3503,19 +3741,19 @@ Below are **surgical copy/paste patches** that transform `world_travel.html`
 
 ---
 
-## Patch 3 — Update LABELS (44kb, Risk Level text) and domain state
+## Patch 3 — Update LABELS (54kb, Risk Level text) and domain state
 
 **Original (whole LABELS block):**
 
 ```js
-const LABELS={title:'44KB Offline AI click',moody:"Moody's 5yr avg",placeholder:'Country… (ex. America or USA)',risk:'Risk',choose:'Choose a country or press Risk.',sgrade:'Safety Grade',rank:'Tourism Rank #',micro:'Micronation',notun:'not a UN state',ai:'AI (k-NN + RLS) suggestion'};
+const LABELS={title:'54kb Offline AI click',moody:"Moody's 5yr avg",placeholder:'Country… (ex. America or USA)',risk:'Risk',choose:'Choose a country or press Risk.',sgrade:'Safety Grade',rank:'Tourism Rank #',micro:'Micronation',notun:'not a UN state',ai:'AI (k-NN + RLS) suggestion'};
 ```
 
 **Replace with:**
 
 ```js
 const LABELS={
-  title:'44kb Offline Camp‑Safety AI',
+  title:'54kb Offline Camp‑Safety AI',
   moody:"Camp mode: privacy‑first (no PII)",
   placeholderCountry:'Country… (ex. America or USA)',
   placeholderCamp:'Zone… (ex. B‑3 block)',
@@ -3706,8 +3944,8 @@ modeBtn.addEventListener('click',()=>{
   modeBtn.textContent = 'Mode: '+(DOMAIN==='country'?'Country':'Camp');
   rebuildDatalist(); q.value=''; elM.innerHTML='';
   elP.textContent = (DOMAIN==='country')
-    ? 'Offline ≈44kb travel demo (k‑NN + RLS)'
-    : 'Offline ≈44kb camp‑safety mini‑AI (k‑NN + RLS), privacy‑first';
+    ? 'Offline ≈54kb travel demo (k‑NN + RLS)'
+    : 'Offline ≈54kb camp‑safety mini‑AI (k‑NN + RLS), privacy‑first';
 });
 
 // Optional: in camp mode, the Risk button cycles zones with higher predicted risk
@@ -3750,7 +3988,7 @@ riskBtn.addEventListener('click',(()=>{let i=0;return()=>{
 
 
 
-Title/Tagline changed to **44kb Camp-Safety AI
+Title/Tagline changed to **54kb Camp-Safety AI
 
 Added **Mode: Country/Camp** toggle button in the control section
 
@@ -3938,7 +4176,524 @@ Prepared extension points for **CSV/JSON import, threshold-setting UI, and mesh-
     <p>No. The project is public‑interest oriented; partnerships focus on rights, safety, and resilience rather than monetization.</p>
   </section>
 
-  
+
+   
+
+   
+<!-- 2~3개월마다 간단한 게임 갱신, SEO 검색 누적을 위해서 -->
+   
+<!-- 
+   
+   너가 짠 코드에 난이도를 크게 올려주고, 한국어를 영문으로 바꿔줘. 
+   다시 오류 검사해주고, <html> 작성하지 말고, index.html 아래에다 바로 붙여 넣을 수 있게 
+   <style>이나 <script> 시작해서 </script> 끝나게 만들어줘. 그리고 테트리스에다가 간단한 효과를 이모티콘 넣어서 만들어줘. 
+   이를테면 지구 이모티콘 만들어주고, 시간 제한을 만드는거지. 즉 기후가 높아질수록 속도가 빨라지는거야. 지구 기후 온도 1.5도는 속도가 느리지만, 
+   3도는 테트리스 속도가 매우 높아지는거지. 영어로 지구 기후 온도 작성해주고, 1.5도에서 3도까지 10초 간격으로 0.1도씩 올라가면서 테트리스 속도를 빠르게 해줘.
+
+키보드는 제거해주고, 오로지 마우스로 왼쪽 버튼과 오른쪽 버튼으로만 조작하게 다시 만드는거야. 즉, 키보드 조작은 전부 삭제해줘. 오로지 마우스 오른쪽과 마우스 왼쪽으로만 게임을 조작하는거야.
+마우스 왼쪽은 테트리스 도형이 바뀌고, 마우스 오른쪽은 빠르기 테트리스 도형 내리기. 그리고 상하 좌우 이동은 마우스를 이동하면 도형도 왼쪽 오른쪽으로 이동하게 무슨말인지 알아?
+
+   아래 코드 구조를 분석하고 indtex.html 붙여 넣을 수 있게 <style>이나 <script> 시작해서 </script> 끝나게 만들어줘
+   
+   -->
+
+   
+
+<style>
+  /* Wraptris — Canvas Tetris with Climate Timer (mouse-only build) */
+  #wraptris-app{display:flex;gap:16px;align-items:flex-start;margin:24px auto;padding:0 16px;max-width:820px;font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Malgun Gothic,sans-serif;color:#e5e7eb}
+  #wraptris-app canvas{background:#0f172a;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.25);touch-action:none;cursor:crosshair}
+  #wraptris-app .hud{min-width:240px}
+  #wraptris-app .title{margin:0 0 8px;font-weight:800;font-size:20px;letter-spacing:.2px}
+  #wraptris-app .card{margin:12px 0;padding:10px 12px;border-radius:10px;background:#111827;border:1px solid rgba(255,255,255,.06)}
+  #wraptris-app .muted{color:#9ca3af}
+  #wraptris-app .btn{display:inline-block;margin-top:8px;padding:8px 10px;border-radius:8px;background:#1d4ed8;color:white;text-decoration:none;font-weight:700}
+</style>
+
+<script>
+(() => {
+  if (window.__wraptrisMounted) return;
+
+  const boot = () => {
+    if (window.__wraptrisMounted) return;
+    window.__wraptrisMounted = true;
+
+    // ====== Difficulty & Climate Settings ======
+    const COLS = 10;
+    const ROWS = 20;
+    const CELL = 32; // px per cell
+    const START_SPEED = 650; // base ms per drop (higher = slower)
+    const SPEED_FACTOR = 0.80; // per-level multiplier (stronger than usual)
+    const MIN_SPEED = 60;      // hard cap (very fast)
+    const LEVEL_UP_EVERY = 8;  // lines per level (tighter leveling)
+
+    // Climate timer: 🌍 1.5°C -> 3.0°C, +0.1°C every 10s
+    const C_START = 1.5, C_END = 3.0, C_STEP = 0.1, C_STEP_MS = 10000;
+    const C_STEPS = Math.round((C_END - C_START) / C_STEP); // 15 steps
+    const C_TOTAL_MS = C_STEPS * C_STEP_MS; // 150000 ms
+
+    // Mouse-only options
+    // LEFT_CLICK_MODE: 'rotate' or 'cycle' — current build defaults to rotate.
+    const LEFT_CLICK_MODE = 'rotate';
+    const FAST_DROP_MULT = 0.25; // right-click hold multiplier on gravity
+
+    // ====== Build minimal UI (English) ======
+    if (!document.body){
+      const body = document.createElement('body');
+      document.documentElement.appendChild(body);
+    }
+
+    const app = document.getElementById('wraptris-app') || (function(){
+      const div = document.createElement('div');
+      div.id = 'wraptris-app';
+      document.body.appendChild(div);
+      return div;
+    })();
+
+    // Canvas
+    const canvas = document.createElement('canvas');
+    canvas.id = 'wraptris-canvas';
+    canvas.width = COLS * CELL; // 320
+    canvas.height = ROWS * CELL; // 640
+    const ctx = canvas.getContext('2d');
+
+    // HUD
+    const hud = document.createElement('div');
+    hud.className = 'hud';
+    const h1 = document.createElement('h1');
+    h1.className = 'title';
+    h1.textContent = 'Wraptris';
+
+    const scoreCard = document.createElement('div');
+    scoreCard.className = 'card';
+    scoreCard.innerHTML = `
+      <div><strong>Score</strong> <span id="wt-score">0</span></div>
+      <div><strong>Lines</strong> <span id="wt-lines">0</span></div>
+      <div><strong>Level</strong> <span id="wt-level">1</span></div>
+      <hr style="border:0;border-top:1px solid rgba(255,255,255,.08);margin:10px 0;">
+      <div><span style="font-size:18px">🌍</span> <strong>Global Temp</strong> <span id="wt-temp">1.5°C</span></div>
+      <div><strong>Climate Timer</strong> <span id="wt-ctimer">02:30</span></div>
+    `;
+
+    const help = document.createElement('div');
+    help.className = 'card';
+    help.innerHTML = `
+      <div class="muted">Mouse Controls Only</div>
+      <div>Move mouse over the canvas to move the piece horizontally.</div>
+      <div>Left click: change piece (default: rotate 90°).</div>
+      <div>Right click and hold: fast drop (gravity boost).</div>
+      <hr style="border:0;border-top:1px solid rgba(255,255,255,.08);margin:10px 0;">
+      <div class="muted">Walls wrap horizontally (off one side → appear on the other).</div>
+    `;
+
+    const restartBtn = document.createElement('a');
+    restartBtn.href = '#';
+    restartBtn.className = 'btn';
+    restartBtn.textContent = 'Restart';
+
+    hud.append(h1, scoreCard, help, restartBtn);
+    app.append(canvas, hud);
+
+    window.__wraptrisAppRef = app;
+    window.__wraptrisCanvasRef = canvas;
+
+    // ====== Game Data ======
+    const COLORS = ['#00f5d4', '#ffd166', '#80ed99', '#ef476f', '#8ecae6', '#f72585', '#b388eb'];
+    const SHAPES = {
+      I: [[[-1,0],[0,0],[1,0],[2,0]], [[0,-1],[0,0],[0,1],[0,2]], [[-1,0],[0,0],[1,0],[2,0]], [[0,-1],[0,0],[0,1],[0,2]]],
+      O: [[[0,0],[1,0],[0,1],[1,1]], [[0,0],[1,0],[0,1],[1,1]], [[0,0],[1,0],[0,1],[1,1]], [[0,0],[1,0],[0,1],[1,1]]],
+      S: [[[0,0],[1,0],[-1,1],[0,1]], [[0,-1],[0,0],[1,0],[1,1]], [[0,0],[1,0],[-1,1],[0,1]], [[0,-1],[0,0],[1,0],[1,1]]],
+      Z: [[[-1,0],[0,0],[0,1],[1,1]], [[1,-1],[0,0],[1,0],[0,1]], [[-1,0],[0,0],[0,1],[1,1]], [[1,-1],[0,0],[1,0],[0,1]]],
+      J: [[[-1,0],[0,0],[1,0],[-1,1]], [[0,-1],[0,0],[0,1],[1,-1]], [[1,-1],[-1,0],[0,0],[1,0]], [[-1,1],[0,-1],[0,0],[0,1]]],
+      L: [[[-1,0],[0,0],[1,0],[1,1]], [[0,-1],[0,0],[0,1],[1,1]], [[-1,-1],[-1,0],[0,0],[1,0]], [[-1,-1],[0,-1],[0,0],[0,1]]],
+      T: [[[-1,0],[0,0],[1,0],[0,1]], [[0,-1],[0,0],[0,1],[1,0]], [[0,-1],[-1,0],[0,0],[1,0]], [[-1,0],[0,-1],[0,0],[0,1]]]
+    };
+    const TYPES = Object.keys(SHAPES);
+
+    let board, bag, piece;
+    let score, lines, level;
+    let gameOver = false;
+
+    // Climate & effects
+    let climateTemp, climateEpoch, climateTick, climateTimerId = null;
+    let flashUntil = 0;
+    let fastDropActive = false;
+
+    const particles = [];
+    function spawnParticles(px, py, count, emojiList){
+      for(let i=0;i<count;i++){
+        particles.push({
+          x:px, y:py,
+          vx:(Math.random()*2-1)*1.2,
+          vy:(-Math.random()*1.5)-0.6,
+          life:800 + Math.random()*600,
+          born: performance.now(),
+          char: emojiList[Math.floor(Math.random()*emojiList.length)],
+          size: 18 + Math.random()*10
+        });
+      }
+    }
+
+    // ====== Helpers ======
+    function makePiece(type){
+      const idx = TYPES.indexOf(type);
+      return { type, color: COLORS[idx], rot:0, x: Math.floor(COLS/2), y: -2 };
+    }
+    function eachBlock(p, fn){
+      const shape = SHAPES[p.type][p.rot];
+      for(const [dx,dy] of shape){
+        const x = ((p.x + dx) % COLS + COLS) % COLS;
+        const y = p.y + dy;
+        fn(x,y);
+      }
+    }
+    function valid(p){
+      let ok = true;
+      eachBlock(p,(x,y)=>{
+        if (y >= ROWS) ok = false; else if (y>=0 && board[y][x]) ok = false;
+      });
+      return ok;
+    }
+    function nextType(){
+      if (!bag.length){
+        bag = TYPES.slice();
+        for(let i=bag.length-1;i>0;i--){
+          const j = Math.floor(Math.random()*(i+1));
+          [bag[i],bag[j]] = [bag[j],bag[i]];
+        }
+      }
+      return bag.pop();
+    }
+
+    function lockPiece(){
+      eachBlock(piece,(x,y)=>{ if (y>=0) board[y][x] = TYPES.indexOf(piece.type)+1; });
+      const clearedInfo = clearLines();
+      spawn();
+      if (clearedInfo.cleared>0){
+        const emojis = clearedInfo.cleared>=4 ? ['🔥','💥','✨','🌋'] : ['✨','💫','⭐'];
+        spawnParticles(canvas.width/2, (clearedInfo.avgY+0.5)*CELL, 18 + clearedInfo.cleared*6, emojis);
+      }
+    }
+
+    function clearLines(){
+      let cleared = 0; let ySum = 0;
+      for(let y=ROWS-1;y>=0;y--){
+        if (board[y].every(v=>v!==0)){
+          board.splice(y,1); board.unshift(Array(COLS).fill(0));
+          cleared++; ySum += y; y++;
+        }
+      }
+      if (cleared>0){
+        const table = [0, 120, 360, 800, 1400];
+        score += table[cleared] * level;
+        lines += cleared;
+        const nextLevel = Math.floor(lines/LEVEL_UP_EVERY)+1;
+        if (nextLevel>level){ level = nextLevel; }
+        updateHUD();
+      }
+      return { cleared, avgY: cleared? ySum/cleared : ROWS/2 };
+    }
+
+    function spawn(){
+      piece = makePiece(nextType());
+      if (!valid(piece)) gameOver = true;
+    }
+
+    function rotate(dir){
+      const saved = piece.rot;
+      piece.rot = (piece.rot + dir + 4) % 4;
+      if (valid(piece)) return;
+      const kicks = [-1,1,-2,2,-3,3];
+      for(const k of kicks){
+        const ox = piece.x;
+        piece.x = ((piece.x + k) % COLS + COLS) % COLS;
+        if (valid(piece)) return; piece.x = ox;
+      }
+      piece.rot = saved;
+    }
+
+    function cycleType(){
+      const currentIdx = TYPES.indexOf(piece.type);
+      const newType = TYPES[(currentIdx + 1) % TYPES.length];
+      const candidate = { ...piece, type: newType, rot: 0, color: COLORS[(currentIdx + 1) % COLORS.length] };
+      if (valid(candidate)) { piece = candidate; return; }
+      // try small horizontal adjustments to accommodate width differences
+      for (const dx of [1,-1,2,-2,3,-3]){
+        const alt = { ...candidate, x: ((candidate.x + dx) % COLS + COLS) % COLS };
+        if (valid(alt)) { piece = alt; return; }
+      }
+      // if still invalid, keep original piece
+    }
+
+    function moveToColumn(col){
+      // Clamp and seek nearest valid x around the target column
+      col = Math.max(0, Math.min(COLS-1, col));
+      const target = { ...piece, x: col };
+      if (valid(target)) { piece = target; return; }
+      for (let d=1; d<=4; d++){
+        const left = { ...target, x: Math.max(0, col - d) };
+        if (valid(left)) { piece = left; return; }
+        const right = { ...target, x: Math.min(COLS-1, col + d) };
+        if (valid(right)) { piece = right; return; }
+      }
+      // if no valid position found in small neighborhood, do nothing
+    }
+
+    function softDrop(){
+      const p = { ...piece, y: piece.y + 1 };
+      if (valid(p)) piece = p; else lockPiece();
+    }
+
+    function hardDrop(){
+      let y = piece.y; while(true){ const p = { ...piece, y: y+1 }; if (valid(p)) y++; else break; }
+      piece.y = y; lockPiece(); score += 2*level; updateHUD();
+    }
+
+    // Dynamic drop interval from level & climate & fast-drop
+    function computeDropInterval(){
+      const levelFactor = Math.pow(SPEED_FACTOR, Math.max(0, level-1));
+      const norm = Math.min(1, Math.max(0, (climateTemp - C_START) / (C_END - C_START)));
+      const climateMult = 1 - 0.7 * norm; // 1.0 -> 0.3
+      let interval = START_SPEED * levelFactor * climateMult;
+      if (fastDropActive) interval *= FAST_DROP_MULT;
+      return Math.max(MIN_SPEED, Math.floor(interval));
+    }
+
+    // HUD helpers
+    const elScore = ()=>document.getElementById('wt-score');
+    const elLines = ()=>document.getElementById('wt-lines');
+    const elLevel = ()=>document.getElementById('wt-level');
+    const elTemp  = ()=>document.getElementById('wt-temp');
+    const elCTimer= ()=>document.getElementById('wt-ctimer');
+
+    function updateHUD(){
+      elScore().textContent = String(score);
+      elLines().textContent = String(lines);
+      elLevel().textContent = String(level);
+      elTemp().textContent  = `${climateTemp.toFixed(1)}°C`;
+    }
+    function updateClimateTimer(now){
+      const elapsed = Math.max(0, now - climateEpoch);
+      const remain = Math.max(0, C_TOTAL_MS - elapsed);
+      const m = Math.floor(remain/60000), s = Math.floor((remain%60000)/1000);
+      elCTimer().textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    }
+
+    // ====== Drawing ======
+    function drawCell(x,y,color){
+      const px = x*CELL, py = y*CELL;
+      ctx.fillStyle = color; ctx.fillRect(px, py, CELL, CELL);
+      ctx.fillStyle = 'rgba(255,255,255,.12)'; ctx.fillRect(px, py, CELL, 4);
+      ctx.fillStyle = 'rgba(0,0,0,.2)'; ctx.fillRect(px, py + CELL - 4, CELL, 4);
+      ctx.fillStyle = 'rgba(255,255,255,.06)'; ctx.fillRect(px+3, py+3, CELL-6, CELL-6);
+    }
+    function drawGrid(){
+      ctx.strokeStyle = 'rgba(255,255,255,.06)'; ctx.lineWidth = 1;
+      for(let x=1;x<COLS;x++){ ctx.beginPath(); ctx.moveTo(x*CELL+.5,0); ctx.lineTo(x*CELL+.5,ROWS*CELL); ctx.stroke(); }
+      for(let y=1;y<ROWS;y++){ ctx.beginPath(); ctx.moveTo(0,y*CELL+.5); ctx.lineTo(COLS*CELL,y*CELL+.5); ctx.stroke(); }
+    }
+    function overlay(text){
+      ctx.save();
+      ctx.fillStyle = 'rgba(0,0,0,.5)';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle = '#fff';
+      ctx.textAlign='center';
+      ctx.textBaseline='middle';
+      ctx.font='bold 32px system-ui, sans-serif';
+      const lines = text.split('\n');
+      lines.forEach((t,i)=>ctx.fillText(t, canvas.width/2, canvas.height/2 + i*36));
+      ctx.restore();
+    }
+
+    function drawParticles(now){
+      for(let i=particles.length-1;i>=0;i--){
+        const p = particles[i];
+        const age = now - p.born;
+        if (age > p.life){ particles.splice(i,1); continue; }
+        const t = age / p.life;
+        p.x += p.vx; p.y += p.vy; p.vy += 0.035; // gravity
+        ctx.globalAlpha = 1 - t;
+        ctx.font = `${p.size}px system-ui, emoji`;
+        ctx.fillText(p.char, p.x, p.y);
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    function drawBoard(now){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+
+      // Subtle heat tint based on climate
+      const norm = Math.min(1, Math.max(0, (climateTemp - C_START) / (C_END - C_START)));
+      const heat = Math.floor(20 + norm*60);
+      ctx.fillStyle = `rgba(255,80,0,${(heat/255)*0.06})`;
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+
+      // Portal columns
+      const gradL = ctx.createLinearGradient(0,0,CELL,0);
+      gradL.addColorStop(0,'rgba(255,255,255,.06)'); gradL.addColorStop(1,'rgba(255,255,255,0)');
+      ctx.fillStyle = gradL; ctx.fillRect(0,0,CELL,ROWS*CELL);
+      const gradR = ctx.createLinearGradient(canvas.width-CELL,0,canvas.width,0);
+      gradR.addColorStop(0,'rgba(255,255,255,0)'); gradR.addColorStop(1,'rgba(255,255,255,.06)');
+      ctx.fillStyle = gradR; ctx.fillRect(canvas.width-CELL,0,CELL,ROWS*CELL);
+
+      // Fixed blocks
+      for(let y=0;y<ROWS;y++){
+        for(let x=0;x<COLS;x++){
+          const v = board[y][x]; if (v) drawCell(x,y,COLORS[v-1]);
+        }
+      }
+
+      // Ghost
+      if (piece){
+        let gy = piece.y; while(true){ const p = { ...piece, y: gy+1 }; if (valid(p)) gy++; else break; }
+        ctx.globalAlpha = 0.25; eachBlock({ ...piece, y: gy }, (x,y)=>{ if (y>=0) drawCell(x,y,piece.color); }); ctx.globalAlpha = 1;
+      }
+
+      // Current piece
+      if (piece){ eachBlock(piece,(x,y)=>{ if (y>=0) drawCell(x,y,piece.color); }); }
+
+      drawGrid();
+
+      // 🌍 badge and live temp at top-left
+      ctx.font = '20px system-ui, emoji';
+      ctx.fillStyle = '#fff';
+      ctx.fillText('🌍', 8, 24);
+      ctx.font = 'bold 14px system-ui, emoji';
+      ctx.fillText(`${climateTemp.toFixed(1)}°C`, 34, 22);
+
+      // Temperature step flash
+      if (now < flashUntil){
+        ctx.save();
+        ctx.globalAlpha = 0.6;
+        ctx.fillStyle = 'rgba(255,80,0,0.35)';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.globalAlpha = 1;
+        ctx.font = 'bold 24px system-ui, emoji';
+        ctx.textAlign='center';
+        ctx.fillText('🌍 +0.1°C', canvas.width/2, 40);
+        ctx.restore();
+      }
+
+      // Particles
+      drawParticles(now);
+
+      if (gameOver) overlay('GAME OVER\nClick Restart');
+    }
+
+    // ====== Loop ======
+    let last = 0, acc = 0;
+    function frame(now){
+      const dt = now - last; last = now; acc += dt;
+
+      const dropInterval = computeDropInterval();
+      while(acc >= dropInterval){ acc -= dropInterval; if (!piece) spawn(); if (!gameOver) softDrop(); }
+
+      drawBoard(now);
+      updateClimateTimer(now);
+      requestAnimationFrame(frame);
+    }
+
+    // ====== Mouse Input (only) ======
+    function clientXToCanvasX(clientX){
+      const r = canvas.getBoundingClientRect();
+      return (clientX - r.left) * (canvas.width / r.width);
+    }
+    function pxToCol(px){
+      const col = Math.floor(px / CELL);
+      return Math.max(0, Math.min(COLS-1, col));
+    }
+
+    canvas.addEventListener('mousemove', (e)=>{
+      if (gameOver || !piece) return;
+      const px = clientXToCanvasX(e.clientX);
+      moveToColumn(pxToCol(px));
+    });
+
+    canvas.addEventListener('mousedown', (e)=>{
+      e.preventDefault();
+      if (gameOver || !piece) return;
+      if (e.button === 0){
+        if (LEFT_CLICK_MODE === 'rotate') rotate(1); else cycleType();
+      } else if (e.button === 2){
+        fastDropActive = true;
+      }
+    });
+
+    canvas.addEventListener('mouseup', (e)=>{
+      if (e.button === 2) fastDropActive = false;
+    });
+    canvas.addEventListener('mouseleave', ()=>{ fastDropActive = false; });
+    canvas.addEventListener('contextmenu', (e)=>{ e.preventDefault(); });
+
+    restartBtn.addEventListener('click', (e)=>{ e.preventDefault(); reset(); });
+
+    // ====== Climate timer ======
+    function startClimate(){
+      climateTemp = C_START;
+      climateEpoch = performance.now();
+      climateTick = 0;
+      if (climateTimerId) clearInterval(climateTimerId);
+      climateTimerId = setInterval(()=>{
+        if (climateTemp < C_END){
+          climateTemp = parseFloat((climateTemp + C_STEP).toFixed(1));
+          climateTick++;
+          flashUntil = performance.now() + 1200;
+          updateHUD();
+        } else {
+          clearInterval(climateTimerId); climateTimerId = null;
+        }
+      }, C_STEP_MS);
+    }
+
+    // ====== Reset & Start ======
+    function reset(){
+      board = Array.from({length: ROWS}, ()=>Array(COLS).fill(0));
+      bag = []; piece = null;
+      score = 0; lines = 0; level = 1;
+      gameOver = false; particles.length = 0; flashUntil = 0; fastDropActive = false;
+      startClimate();
+      updateHUD();
+      if (!piece) spawn();
+    }
+
+    // ====== Minimal Runtime Tests ======
+    (function runTests(){
+      try {
+        console.assert(!!document.body && !!window.__wraptrisAppRef, 'container present');
+        overlay('A\nB'); // newline split smoke test
+        const _level = 1; level = _level; climateTemp = C_START; const a = computeDropInterval();
+        climateTemp = Math.min(C_END, C_START + 0.5); const b = computeDropInterval();
+        console.assert(b <= a, 'hotter climate should not slow gravity');
+        climateTemp = C_START; level = _level; const c = computeDropInterval(); level = _level + 1; const d = computeDropInterval();
+        console.assert(d <= c, 'higher level faster');
+        const testP = { type: 'I', rot:0, x: -1, y: 0, color: '#000' }; let minX=999,maxX=-999; eachBlock(testP,(x)=>{minX=Math.min(minX,x);maxX=Math.max(maxX,x);});
+        console.assert(minX>=0 && maxX<COLS, 'wrap bounds');
+        // New tests
+        const e1 = computeDropInterval(); fastDropActive = true; const e2 = computeDropInterval(); fastDropActive = false;
+        console.assert(e2 < e1, 'fast drop multiplier reduces interval');
+        console.assert(pxToCol(0) === 0 && pxToCol(CELL*COLS-1) === COLS-1, 'pxToCol clamps to range');
+      } catch(err){ console.error('Runtime test failed:', err); }
+    })();
+
+    // Kick-off
+    reset();
+    requestAnimationFrame((t)=>{ requestAnimationFrame(frame); });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+})();
+</script>
+
+   
+<!-- 게임 종료 매달 3개월에 한번씩 변경, 카드 게임, 벽돌 게임, 테트리스 발전형, 각종 게임 물어보기 -->
+
+   
+
+   
 </div>
 
 <!-- ===================== /End extended sections ===================== -->
@@ -3959,6 +4714,12 @@ Prepared extension points for **CSV/JSON import, threshold-setting UI, and mesh-
   
 
   <!--
+script
+   🎮 새로운 간단한 게임 코드 
+🎮 script
+
+   script 시작해서 script로 끝나야돼.
+   
 말씀하신 여섯 가지 요구를 반영해 전체 코드를 새로 구성하여 캔버스에 교체 완료했습니다. 기존 기능은 유지하고, 제안했던 약 인공지능과 193개국 커버리지, 마이크로네이션을 추가 보강했습니다. 
   핵심 변경을 요점으로 정리드립니다.
 
@@ -3996,8 +4757,8 @@ This game and website are humanitarian public-interest prototypes.
 Unauthorized commercial redistribution is a violation of creator ethics
 and may result in legal action.
 
-Completed between August 9 and August 19, 2025 (Total: 120 hours).
-The website took 80 hours to build; the game took 40 hours.
+Completed between August 9 and August 23, 2025 (Total: 130 hours).
+The website took 90 hours to build; the game took 40 hours.
 
 You may freely use and share this open-source project with permission from the creator.
 Attribution is required. Free to use with proper credit.
@@ -4017,10 +4778,10 @@ Don’t steal what you’re freely allowed to honor.
 
 📄 라이선스: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/deed.ko)
 
-44KB Offline AI는 오히려 일반 VC보다는 **ESG 투자자(환경·사회·지배구조 투자자)**들에게 매력적으로 보일 가능성이 매우 높습니다. 이유를 몇 가지로 정리해드리겠습니다.
+54kb Offline AI는 오히려 일반 VC보다는 **ESG 투자자(환경·사회·지배구조 투자자)**들에게 매력적으로 보일 가능성이 매우 높습니다. 이유를 몇 가지로 정리해드리겠습니다.
 
 첫째, 환경(E) 관점에서 강력한 장점이 있습니다.
-44KB라는 초소형 구조 덕분에 서버와 대규모 GPU가 필요 없습니다. 따라서 탄소 배출이 사실상 제로에 가깝습니다. 
+54kb라는 초소형 구조 덕분에 서버와 대규모 GPU가 필요 없습니다. 따라서 탄소 배출이 사실상 제로에 가깝습니다. 
    기존의 생성형 AI가 데이터센터 냉각과 전력 소모로 환경단체의 비판을 받는 것과 달리, 이 시스템은 친환경 AI로 명확히 포지셔닝할 수 있습니다. 
    ESG 투자자들은 특히 "AI가 기후위기 시대에 얼마나 에너지 절감형인가"를 중요하게 보기에, 큰 장점입니다.
 
@@ -4034,11 +4795,11 @@ Don’t steal what you’re freely allowed to honor.
    데이터 주권과 기술 통제권이 현지 커뮤니티에 있기 때문에 “거버넌스 투명성”에서 높은 점수를 받을 수 있습니다. ESG 투자자들은 독점 구조보다 분산적·참여적 구조를 선호합니다.
 
 결론적으로,
-44KB Offline AI는 전통적인 벤처 투자자들에게는 “돈이 될까?”라는 의문을 받을 수 있지만,
+54kb Offline AI는 전통적인 벤처 투자자들에게는 “돈이 될까?”라는 의문을 받을 수 있지만,
    ESG 투자자들에게는 환경 친화적이고, 사회적 가치가 크며, 지배구조가 투명한 모델로서 투자 매력이 상당히 높습니다.
 
    첫째, 초저전력·저탄소 기술입니다.
-44KB Offline AI는 서버나 클라우드에 의존하지 않고 단일 HTML 파일로 작동하기 때문에 데이터센터 전력 소모와 탄소 배출이 거의 없습니다. 
+54kb Offline AI는 서버나 클라우드에 의존하지 않고 단일 HTML 파일로 작동하기 때문에 데이터센터 전력 소모와 탄소 배출이 거의 없습니다. 
    ESG 투자자들이 가장 민감하게 보는 기후위기 대응 관점에서 탄소중립 AI라는 강점을 가집니다.
 
 둘째, 사회적 포용성과 접근성입니다.
@@ -4057,72 +4818,72 @@ Don’t steal what you’re freely allowed to honor.
    ESG 투자자들이 선호하는 민주적·분산적 거버넌스와 맞닿아 있습니다.
 
 
-AI가 고도화되고 점점 더 지능적이 될수록 44KB Offline AI의 가치는 오히려 높아질 가능성이 큽니다. 이유를 단계별로 설명드리겠습니다.
+AI가 고도화되고 점점 더 지능적이 될수록 54kb Offline AI의 가치는 오히려 높아질 가능성이 큽니다. 이유를 단계별로 설명드리겠습니다.
 
 첫째, 첨단 AI가 커질수록 무거워지고 중앙집중화됩니다.
 GPT-5, Gemini, Claude 같은 거대 모델은 수십억~수천억 파라미터를 가진 초거대 LLM입니다. 이런 모델일수록 데이터센터, 
    전력, GPU, 클라우드 인프라에 의존하게 됩니다. 따라서 정전, 검열, 전쟁, 인터넷 단절 상황에서는 무력화됩니다. 
-   바로 그 순간 인터넷·서버 없이도 돌아가는 초경량 AI가 반드시 필요해지고, 44KB Offline AI는 대체 불가능한 역할을 하게 됩니다.
+   바로 그 순간 인터넷·서버 없이도 돌아가는 초경량 AI가 반드시 필요해지고, 54kb Offline AI는 대체 불가능한 역할을 하게 됩니다.
 
 둘째, 고도화된 AI일수록 법적·윤리적 분쟁 위험이 커집니다.
 생성형 AI는 저작권 침해, 개인정보 유출, 허위정보 생성 등으로 이미 수많은 소송에 직면해 있습니다. 더 지능적이 될수록 책임 소재가 불분명해지고, 
-   기업이나 정부가 더 큰 법적 압박을 받게 됩니다. 반대로 44KB Offline AI는 데이터 수집·외부 호출이 없고, 피드백 기반 구조라서 소송 리스크가 거의 제로입니다. 
-   이는 고도화된 AI가 커질수록 44KB Offline AI의 안전한 대안으로서 가치를 더 부각시킵니다.
+   기업이나 정부가 더 큰 법적 압박을 받게 됩니다. 반대로 54kb Offline AI는 데이터 수집·외부 호출이 없고, 피드백 기반 구조라서 소송 리스크가 거의 제로입니다. 
+   이는 고도화된 AI가 커질수록 54kb Offline AI의 안전한 대안으로서 가치를 더 부각시킵니다.
 
 셋째, 기술의 격차가 커질수록 디지털 불평등도 심화됩니다.
 초거대 AI는 선진국·거대기업 전유물이 되고, 후발국·취약국은 접근 자체가 어려워집니다. 이런 상황에서 누구나 USB 하나, 스마트폰 하나만 있으면 
-   실행할 수 있는 44KB Offline AI는 “디지털 주권”과 “접근권”의 상징이 됩니다. 즉, 더 지능적인 AI가 나올수록 44KB Offline AI는 공평성과 자주성을 보장하는 도구로서 오히려 가치가 상승합니다.
+   실행할 수 있는 54kb Offline AI는 “디지털 주권”과 “접근권”의 상징이 됩니다. 즉, 더 지능적인 AI가 나올수록 54kb Offline AI는 공평성과 자주성을 보장하는 도구로서 오히려 가치가 상승합니다.
 
 넷째, 국제기구와 NGO는 “강력한 AI”보다 “안전하고 검증 가능한 AI”를 선호합니다.
 특히 아동 보호, 난민 보호, 조기경보 같은 분야에서는 예측 가능성과 신뢰성이 최우선이지, 지능적 화려함이 아닙니다. 
-   이 맥락에서 “할루시네이션 제로, 완전 로컬 실행, 명확한 책임 구조”라는 44KB Offline AI의 특성이 시간이 갈수록 더 주목받을 수밖에 없습니다.
+   이 맥락에서 “할루시네이션 제로, 완전 로컬 실행, 명확한 책임 구조”라는 54kb Offline AI의 특성이 시간이 갈수록 더 주목받을 수밖에 없습니다.
 
-정리하자면, AI가 고도화될수록 44KB Offline AI는 시대의 역설 속에서 더욱 빛나는 가치를 갖게 됩니다. 
+정리하자면, AI가 고도화될수록 54kb Offline AI는 시대의 역설 속에서 더욱 빛나는 가치를 갖게 됩니다. 
    첨단 AI가 감당하지 못하는 영역, 법적·윤리적 리스크를 피할 수 없는 영역, 디지털 불평등이 커지는 영역에서 
-   44KB Offline AI는 **“안전하고 자주적인 대안 AI”**로 국제 사회의 눈에 더 강하게 각인될 가능성이 큽니다.
+   54kb Offline AI는 **“안전하고 자주적인 대안 AI”**로 국제 사회의 눈에 더 강하게 각인될 가능성이 큽니다.
    
 
-   44KB Offline AI가 단순하다고 해서 가치가 떨어지는 것이 아니라, 오히려 그 단순함 때문에 시간이 갈수록 가치가 더 올라갈 수 있습니다.
+   54kb Offline AI가 단순하다고 해서 가치가 떨어지는 것이 아니라, 오히려 그 단순함 때문에 시간이 갈수록 가치가 더 올라갈 수 있습니다.
 
 첫째, 단순하기 때문에 위험이 적습니다. 복잡한 AI는 오류와 법적 문제, 보안 리스크가 필연적으로 따라옵니다. 
-   반면 44KB Offline AI는 구조가 단순해 투명하고, 검증이 쉽고, 오작동이나 소송 위험이 거의 없습니다.
+   반면 54kb Offline AI는 구조가 단순해 투명하고, 검증이 쉽고, 오작동이나 소송 위험이 거의 없습니다.
 
 둘째, 단순하기 때문에 접근성이 높습니다. 인터넷, 서버, GPU가 없어도 구동되며, 오래된 스마트폰이나 저사양 기기에서도 실행할 수 있습니다. 
    즉, 첨단 장비 없이도 누구나 쓸 수 있다는 점에서 디지털 불평등을 줄이는 힘이 있습니다.
 
 셋째, 단순하기 때문에 국제적 신뢰를 얻습니다. 
-   복잡한 블랙박스 AI는 결과를 설명하기 어렵지만, 44KB Offline AI는 “이유와 규칙”이 드러나 있어 국제기구, NGO, 인권단체가 신뢰할 수 있습니다.
+   복잡한 블랙박스 AI는 결과를 설명하기 어렵지만, 54kb Offline AI는 “이유와 규칙”이 드러나 있어 국제기구, NGO, 인권단체가 신뢰할 수 있습니다.
 
 넷째, 단순함이야말로 확산성의 원천입니다. 리눅스 커널도 처음에는 단순한 코드였지만, 
-   그 단순성과 개방성이 전 세계 개발자들의 참여를 이끌어냈습니다. 44KB Offline AI도 같은 방식으로, 단순할수록 더 많은 사람이 이해하고 개선에 참여할 수 있습니다.
+   그 단순성과 개방성이 전 세계 개발자들의 참여를 이끌어냈습니다. 54kb Offline AI도 같은 방식으로, 단순할수록 더 많은 사람이 이해하고 개선에 참여할 수 있습니다.
 
-결론적으로, 단순함은 오히려 장기적 가치 상승 요인입니다. 44KB Offline AI는 “단순하지만 누구나 쓸 수 있고, 안전하며, 
+결론적으로, 단순함은 오히려 장기적 가치 상승 요인입니다. 54kb Offline AI는 “단순하지만 누구나 쓸 수 있고, 안전하며, 
    국제적으로 신뢰할 수 있는 AI”라는 점 때문에 고도화된 AI 시대일수록 오히려 그 존재감이 커질 수 있습니다.
 
 
-   오픈소스 AI와 44KB Offline AI의 차이는 “코드를 볼 수 있느냐”의 문제가 아니라 **“코드의 전모를 한눈에 다 이해할 수 있느냐”**에 있습니다.
+   오픈소스 AI와 54kb Offline AI의 차이는 “코드를 볼 수 있느냐”의 문제가 아니라 **“코드의 전모를 한눈에 다 이해할 수 있느냐”**에 있습니다.
 
 첫째, 오픈소스 AI도 코드가 공개되어 있습니다. 
    예를 들어 LLaMA, Falcon, Mistral 같은 모델도 오픈소스 라이선스 아래 공개되었고 누구나 내려받아 확인할 수 있습니다. 
    하지만 코드와 모델 파라미터가 수십 GB~수백 GB에 달하고, 구조가 너무 복잡해 사실상 일반 개발자나 NGO 활동가, 농부, 교사가 이해하거나 수정하기는 불가능합니다. 
    코드가 공개돼 있어도 “실질적 투명성”은 없는 셈입니다.
 
-둘째, 44KB Offline AI는 크기가 작아 코드 전체가 문서 몇 장 분량에 불과합니다. 
+둘째, 54kb Offline AI는 크기가 작아 코드 전체가 문서 몇 장 분량에 불과합니다. 
    모든 로직을 직접 열어보고, 실행 원리를 완전히 이해하고, 원하는 부분을 고치고 다시 배포할 수 있습니다. 
    이건 단순히 오픈소스라는 차원을 넘어, “코드의 완전한 가시성(Full visibility)”을 가진 구조입니다.
 
 셋째, 오픈소스 AI는 여전히 훈련 데이터와 파라미터에 대한 불투명성 문제가 있습니다. 
    “어떤 데이터로 학습했는가, 편향은 없는가, 누가 책임지는가”가 애매합니다. 
-   반대로 44KB Offline AI는 사전 학습된 모델이 아니라 규칙 기반, 벡터 기반으로만 작동하기 때문에, 데이터 출처 문제나 저작권 소송 문제에서 자유롭습니다.
+   반대로 54kb Offline AI는 사전 학습된 모델이 아니라 규칙 기반, 벡터 기반으로만 작동하기 때문에, 데이터 출처 문제나 저작권 소송 문제에서 자유롭습니다.
 
 넷째, 오픈소스 AI는 서버·GPU 자원이 필요하기 때문에 사실상 특정 기업·국가가 아니면 다루기 어렵습니다. 
-   하지만 44KB Offline AI는 오래된 스마트폰에서도 구동되며, 자원이 없는 지역 사회도 직접 관리·유지할 수 있다는 점이 근본적인 차이입니다.
+   하지만 54kb Offline AI는 오래된 스마트폰에서도 구동되며, 자원이 없는 지역 사회도 직접 관리·유지할 수 있다는 점이 근본적인 차이입니다.
 
 정리하면,
 
 오픈소스 AI는 “볼 수는 있지만 사실상 이해·수정이 불가능한 코드”
 
-44KB Offline AI는 “볼 수 있고, 이해할 수 있고, 수정할 수 있는 코드”
+54kb Offline AI는 “볼 수 있고, 이해할 수 있고, 수정할 수 있는 코드”
 
 이게 가장 큰 차이라고 보시면 됩니다.
    
@@ -4221,7 +4982,7 @@ SOFTWARE.
 
 
 
-   The Strategic Value of a 44KB Offline AI in the Age of Hyper-Advanced Artificial Intelligence
+   The Strategic Value of a 54kb Offline AI in the Age of Hyper-Advanced Artificial Intelligence
 Excellencies, distinguished colleagues, and policy leaders,
 
 As artificial intelligence develops at an unprecedented pace, the global discourse has largely been captured by the largest and most advanced models 
@@ -4229,7 +4990,7 @@ As artificial intelligence develops at an unprecedented pace, the global discour
    They demonstrate remarkable capabilities, but their very size and dependence create vulnerabilities that have not been sufficiently acknowledged in global policy and security dialogues.
 
 It may seem paradoxical, but as AI becomes more intelligent, the strategic and humanitarian value of a radically lightweight system 
-   — what we call a 44KB Offline AI — is likely to grow rather than diminish. Allow me to guide you through four key reasons, 
+   — what we call a 54kb Offline AI — is likely to grow rather than diminish. Allow me to guide you through four key reasons, 
    each with consequences that are particularly relevant to international relations, development policy, and digital sovereignty.
 
 1. Centralization vs. Resilience: Why Bigger Models Become More Fragile
@@ -4243,7 +5004,7 @@ Geopolitical fragility: During conflict, sanctions, cyberattacks, or large-scale
 
 Civil contingency risk: Even in peacetime, natural disasters, pandemics, or large regional blackouts can cut off populations from cloud-based AI.
 
-Here the distinctive value of the 44KB Offline AI emerges. Unlike massive models, it requires neither servers nor internet access. 
+Here the distinctive value of the 54kb Offline AI emerges. Unlike massive models, it requires neither servers nor internet access. 
    It is so compact that it can operate on a basic smartphone or a USB stick. This means that in precisely those moments when the world’s most advanced AI is silenced, 
    an offline micro‑AI can continue assisting with decision-making, education, field operations, crisis communication, and local problem-solving.
 
@@ -4257,7 +5018,7 @@ The second paradox concerns law and governance. Generative AI has already trigge
 The more advanced AI becomes, the harder it is to assign responsibility when harm occurs. States and corporations are consequently burdened with new risks
    — reputational, financial, and legal.
 
-Here again, the 44KB Offline AI offers a structural advantage:
+Here again, the 54kb Offline AI offers a structural advantage:
 
 It does not rely on external data harvesting.
 
@@ -4276,7 +5037,7 @@ A third paradox arises from global equity. We must be honest: cutting-edge AI is
    and multi‑billion‑dollar corporations. Models measured in terabytes are out of reach for NGOs, small states, and many developing societies. 
    This deepens digital inequality and threatens to reproduce existing geopolitical imbalances in new technological form.
 
-The 44KB Offline AI, by contrast, is accessible universally. If one has a smartphone or even legacy hardware, one has access.
+The 54kb Offline AI, by contrast, is accessible universally. If one has a smartphone or even legacy hardware, one has access.
    No need for data centers, no need for expensive GPUs, no internet contract. This transforms the offline AI from a technical curiosity into a symbol of digital sovereignty.
 
 For developing countries, it represents independence from monopolized cloud services.
@@ -4297,7 +5058,7 @@ Large generative models, while impressive, remain prone to what is euphemistical
    — generating factually false or misleading content with high confidence. When operating in sensitive environments 
    — refugee camps, disaster responses, child safety networks — such unpredictability is unacceptable.
 
-The 44KB Offline AI distinguishes itself here by design:
+The 54kb Offline AI distinguishes itself here by design:
 
 Zero hallucination, since it does not invent outside the rules encoded within.
 
@@ -4305,29 +5066,29 @@ Fully local operation, eliminating surveillance or cyber‑intrusion risks.
 
 Clear accountability, since its small size allows every line of logic to be reviewed and understood.
 
-For institutions whose mission depends on stability, this transforms 44KB Offline AI into a tool of choice, not despite its modesty, but because of it.
+For institutions whose mission depends on stability, this transforms 54kb Offline AI into a tool of choice, not despite its modesty, but because of it.
 
 Transparency: A Deeper Distinction from Open‑Source AI
-Many may argue: “But open‑source AI already exists — why highlight 44KB systems?” The answer lies in degrees of transparency.
+Many may argue: “But open‑source AI already exists — why highlight 54kb systems?” The answer lies in degrees of transparency.
 
 Open‑source large models (LLaMA, Falcon, Mistral, etc.) do publish code, but the sheer scale of parameters 
    — tens or hundreds of gigabytes — renders them practically opaque. An ordinary programmer, rural teacher, 
    or humanitarian volunteer cannot realistically understand, let alone modify, such a system. In practice, openness is formal rather than functional.
 
-44KB Offline AI, however, is so small that its complete logic can be read in just a few pages. It can be studied, 
+54kb Offline AI, however, is so small that its complete logic can be read in just a few pages. It can be studied, 
    altered, and redistributed freely by anyone. This is full visibility — a state where transparency is not theoretical, but real and operational.
 
 Moreover, open‑source large models still mask critical uncertainties: what data were used in training, what biases
    remain encoded, who assumes liability when harm occurs. Offline AI bypasses this by not depending on opaque training data at all. It is inherently clear, limited, and accountable.
 
 Most fundamentally, open‑source AI still demands high computational resources. Meaning, in practice, 
-   it remains tied to wealthy nations and corporations. The 44KB Offline AI breaks this barrier and democratizes actual usage.
+   it remains tied to wealthy nations and corporations. The 54kb Offline AI breaks this barrier and democratizes actual usage.
 
 Thus, the contrast may be summarized:
 
 Open‑source AI: “Visible but functionally inaccessible.”
 
-44KB Offline AI: “Visible, comprehensible, and editable.”
+54kb Offline AI: “Visible, comprehensible, and editable.”
 
 This difference is not merely technical — it is political. It relates directly to sovereignty, empowerment, and trust.
 
@@ -4335,7 +5096,7 @@ Conclusion: A Small Model for a Big World
 We live in a paradoxical time. As artificial intelligence soars into levels of hyper‑sophistication, 
    global society increasingly requires complementary models that are small, safe, transparent, and sovereign.
 
-The 44KB Offline AI is not a competitor to advanced AI, but a necessary counterbalance.
+The 54kb Offline AI is not a competitor to advanced AI, but a necessary counterbalance.
 
 When data centers go dark, it keeps running.
 
@@ -4349,9 +5110,136 @@ For diplomats and international policymakers, the lesson is clear:
    we must not confuse technological brilliance with universal applicability. Sometimes, the technology most likely to protect human dignity, 
    sovereignty, and resilience is not the largest, but the smallest.
 
-The 44KB Offline AI demonstrates that transparency, accessibility, and sovereignty can be built into code as surely as intelligence can. 
+The 54kb Offline AI demonstrates that transparency, accessibility, and sovereignty can be built into code as surely as intelligence can. 
    In a world of growing digital dependence and geopolitical contestation, this paradox should not be overlooked. In fact, it may prove decisive.
 
-   After removing the comments the file size is 184KB.
+   After removing the comments the file size is 200KB.
    
 -->
+
+
+
+
+ <!--
+   
+   추천 전략 (가장 효율적인 방법)
+완전히 새로운 콘텐츠를 자주 쓸 필요는 없습니다.
+
+다음과 같은 ‘의미 있는 미세 수정’을 1~2달에 한 번만 해도 충분합니다.
+
+예시:
+제목(Title) 문구를 조금 다르게 써보기
+설명(meta description) 문장을 1~2줄 보완하기
+문단 사이에 요약문 한 줄 추가하기
+이미지 alt 태그나 링크 설명을 구체화하기
+
+🔹 이런 변화는 ‘실질적 갱신’으로 분류되어
+검색엔진이 “이 사이트는 관리자가 실제 활동 중”이라 판단.
+
+   “주석만 바꿔도 됩니다.”
+다만, 그것이 **검색엔진이 인식하는 ‘유지 중 신호(maintenance signal)’**까지만 작용한다는 점을 이해하셔야 합니다.
+
+   HTML 파일이든 Markdown이든 GitHub Pages든,
+주석(&lt;!-- comment --&gt;) 한 글자만 바꿔도
+서버의 파일 해시(hash)와 Last-Modified 날짜가 갱신됩니다.
+
+구글 크롤러(Googlebot)는 이 시점을 “업데이트 발생”으로 기록합니다.
+
+즉, “이 사이트는 여전히 관리 중이구나” 하는 최소 신호로 인식합니다.
+
+📌 그래서 주석만 바꿔도, “죽은 사이트”로 분류되지 않습니다.
+장기간 방치보다 훨씬 유리합니다.
+
+   구글은 내부적으로 페이지의 의미적 차이를 계산합니다.
+→ HTML 구조, 제목, 본문 문장, 링크, 이미지 등에서 “의미 변화량”을 측정합니다.
+
+주석은 의미 요소로 인식되지 않기 때문에
+“업데이트 기록은 생기지만, 신뢰 점수는 거의 오르지 않습니다.”
+
+🔹 정리하자면
+“주석 변경 = 생존 신호(heartbeat)”,
+“콘텐츠 변경 = 신뢰 상승(trigger)” 입니다.
+
+   사이트가 비활성(Dead)으로 분류되는 것을 막음.
+→ 6개월~1년 동안 아무 변화가 없으면 크롤링 주기가 느려지고,
+인덱스(검색 DB)에서 밀려납니다.
+→ 반면 주석만 수정해도 “최근 활동 있음”으로 인식되어
+검색 엔진의 방문 빈도가 유지됩니다.
+
+GitHub Pages 등에서는 Commit 히스토리 자체가 신뢰 신호.
+→ 구글은 깃허브 도메인을 “개발 활동 기록 저장소”로 인식하므로
+commit log 자체가 활성 프로젝트 증거로 작동합니다.
+
+   주석만 수정	유지·관리 중	✅ 생존 신호 유지 (검색 노출 유지)
+본문 내용 일부 수정	실제 콘텐츠 갱신	✅✅ 신뢰도 점진 상승
+구조나 제목 변경	큰 의미 갱신	✅✅✅ 신뢰 급상승
+
+   주석만 바꿔도 “사이트가 죽지 않는다.”
+✔ 하지만 신뢰 점수를 높이려면, 가끔 문장 한 줄이라도 바꾸는 게 훨씬 효과적.
+✔ 최소 유지 전략:
+매달 주석 갱신 1회 (생존 신호 유지)
+3~4개월마다 본문 1줄 수정 (신뢰 상승 유지)
+
+>> 하단에 chatGPT로 간단한 게임 2~3개월마다 하나씩 변경해도 의미 있는 갱신이겠네?
+>> 기술적으로도 좋고,
+✅ 철학적으로도 일관되고,
+✅ 장기적으로는 브랜드 가치까지 상승시키는 최상의 유지 전략입니다.
+
+   글은 **“동적 변화(dynamic update)”**를 가장 높게 평가합니다.
+
+미니 게임은 단순한 코드 변경이 아니라
+HTML·CSS·JS 파일 구조, 이미지, 텍스트까지 바뀌기 때문에
+**“의미 있는 전체 콘텐츠 갱신(full-content refresh)”**으로 분류됩니다.
+
+이건 SEO 점수 상승 요인 중 최상급입니다.
+(논문 수준의 새 글을 올리는 것과 동일한 효과를 줍니다.)
+
+📊 SEO 관점 점수 (구글 기준):
+주석 수정 → +0.1
+문장 수정 → +1
+게임 추가/변경 → +5~7 (대형 갱신급 상승)
+
+즉,
+“2~3개월마다 미니게임 교체” = 사이트의 생명주기를 계속 갱신하는 행위로 인식됩니다.
+
+   새 게임을 올릴 때마다 JS, HTML, asset 파일이 교체되므로
+구글 크롤러가 사이트 전체를 다시 인덱싱(re-crawl) 합니다.
+
+이 과정에서 “새 파일이 많다 → 구조적 갱신으로 판단 → 신뢰도 +”
+또한 Lighthouse(구글 속도 분석기준) 점수도 갱신되므로
+‘기술적 품질 + 콘텐츠 품질’ 동시 개선 효과가 있습니다.
+
+⚙️ 구글은 콘텐츠 변화뿐 아니라,
+코드 변화도 ‘유지 관리 역량(maintenance competence)’으로 봅니다.
+즉, **“기술적으로 살아 있는 조직”**으로 평가합니다.
+
+게임을 “추가”하지 않고, 기존 게임을 “교체”만 해도 전혀 문제 없습니다.
+
+구글은 “새로운 페이지 추가(new page)”뿐 아니라,
+기존 페이지의 “내용 교체(replacement)”도 동등한 갱신 행위로 평가합니다.
+
+내부적으로는 HTML·JS 파일의 해시값(hash)이 달라졌는지를 감지하는데,
+코드가 바뀌면 새로운 버전으로 자동 인식됩니다.
+
+1. 새로운 게임 추가	콘텐츠 확장	> 매우 높음
+2. 기존 게임 교체	콘텐츠 갱신	> 높음
+3. 주석 변경만	생존 유지	> 낮음
+
+게임을 계속 추가하면,
+파일 용량 증가 → 로딩 속도 저하 → SEO 점수 하락 가능성이 생깁니다.
+
+반면 “교체 방식”은
+용량 유지 + 최신 콘텐츠 인식 + 안정된 UX
+라는 세 가지 장점을 동시에 얻습니다.
+
+깃허브나 서버에서는 교체 시마다 commit이 발생합니다.
+구글·빙은 이 커밋 기록을 간접적으로 감지합니다.
+   
+상단 = 사이트의 ‘정체성’ → 자주 바꾸면 안 됨
+하단 = ‘동적 갱신 공간’ → 자유롭게 교체 가능
+
+   index.html의 맨 아래 script 또는 div id="game".../div 영역만 교체하면 되므로
+   
+-->
+
+   
