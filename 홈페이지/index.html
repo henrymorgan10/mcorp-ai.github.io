@@ -1,5 +1,6 @@
 <!--
 After removing the comments the file size is 200KB.
+이 구조는 뉴럴넷이 아니라 알고리즘적 강화학습(ε-greedy policy) 로 이루어져 있습니다. 786줄 ~ 1074
 
 Copyright (c) 2025 Gyu‑min Jeon
 License: MIT-NC License (Non-Commercial)
@@ -350,9 +351,29 @@ Don’t steal what you’re freely allowed to honor.
 
 
 
+<!doctype html>
+<html lang="en">
+
+<head>
 
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "M Corp AI – Ethical AI Public Interest Hub",
+  "url": "https://mcorpai.org",
+  "logo": "https://mcorpai.org/logo.png",
+  "sameAs": [
+    "https://mcorp-ai.com",
+    "https://mcorp.ai.kr"
+  ],
+  "description": "M Corp AI operates the public-interest hub for the offline, data-minimizing AI Safety Necklace project. This domain provides ethical AI documentation, humanitarian deployment guidelines, and future ordering for the E-UN initiative."
+}
+</script>
 
+   
+   
 <!-- === BEGIN: A+ SEO HEAD (paste INSIDE your existing <head>) === -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -521,13 +542,6 @@ Don’t steal what you’re freely allowed to honor.
 <!-- === END: A+ SEO HEAD === -->
 
 
-
-
-
-
-
-  
-  
   
   <style>
 .brand-wrap{display:inline-flex;align-items:center;gap:10px}
@@ -685,9 +699,8 @@ nav .bar, .container.bar.card{ overflow: visible; }
 
 </script>
 
-
-
 </head>
+   
 <body>
   <a href="#content" class="sr-only">Skip to content</a>
 
@@ -768,6 +781,1135 @@ Failure to credit the source may result in legal liability.
 </header>
 
 
+
+   
+  <!-- === AI game Start === -->
+
+<style>
+  :root {
+    --rsr-track-h: 120px;
+    --rsr-radius: 14px;
+    --rsr-ground: 10px;
+  }
+  #rsr-root { font-family: system-ui, -apple-system, Segoe UI, Roboto, "Apple SD Gothic Neo", "Noto Sans", sans-serif; color:#111; display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 10px; }
+  .rsr-title { font-weight:800; font-size:18px; letter-spacing:.2px; margin:0; }
+  .rsr-hud { display:flex; gap:10px; flex-wrap:wrap; align-items:center; font-size:13px; color:#1a1a1a; }
+  .rsr-badge { padding:4px 8px; border-radius:999px; border:1px solid #e5e7eb; background:#fafafa; }
+  .rsr-temp strong{ font-weight:800; }
+  .rsr-wrap { width:min(1100px, 100%); position:relative; }
+  .rsr-runner { position:relative; width:100%; height:var(--rsr-track-h); border:1px solid #e5e7eb; border-radius:var(--rsr-radius); overflow:hidden; background:linear-gradient(180deg,#ffffff 0%, #f8fbff 100%); box-shadow:0 1px 0 rgba(0,0,0,.04), inset 0 -20px 40px rgba(0,0,0,.02); }
+  #rsr-canvas { width:100%; height:100%; display:block; }
+  .rsr-overlay { position:absolute; inset:0; background:rgba(255,255,255,.96); display:none; align-items:center; justify-content:center; text-align:center; padding:18px; }
+  .rsr-overlay-inner{ max-width:560px; }
+  .rsr-overlay h2{ margin:0 0 6px 0; font-size:18px; font-weight:800; }
+  .rsr-overlay p{ margin:0 0 12px 0; font-size:14px; color:#333; }
+  .rsr-btn { margin-top:8px; padding:9px 14px; border-radius:10px; border:1px solid #e5e7eb; background:#111827; color:#fff; font-weight:700; cursor:pointer; }
+  .rsr-ground { position:absolute; left:0; right:0; bottom:0; height:var(--rsr-ground); background:repeating-linear-gradient(90deg,#b6c1cd 0 22px,#c5cfda 22px 44px); pointer-events:none; }
+  @media (max-width:600px){ :root{ --rsr-track-h: 100px; } .rsr-hud{ font-size:12px; } }
+</style>
+
+<script>
+(function(){
+  'use strict';
+
+  function onReady(fn){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', fn, {once:true}); else fn(); }
+
+  onReady(()=>{
+    document.title = 'Refugee Self-Reliance';
+
+    // --- DOM scaffold ---
+    const root = document.createElement('div');
+    root.id = 'rsr-root';
+    root.innerHTML = `
+<div class="rsr-title">
+  Refugee Self-Reliance Sovereign AI 🌐
+  <span style="color:#1e90ff;">
+    This is an emoji-sized game (18 Kb) that contains a real-time micro offline AI.
+  </span>
+</div>
+
+
+      <div class="rsr-hud">
+        <span class="rsr-badge rsr-temp">🌡️ Climate Temperature <strong id="rsr-temp">1.5°C</strong></span>
+        <span class="rsr-badge">Score <strong id="rsr-score">0</strong></span>
+        <span class="rsr-badge">Hunger <strong id=\"rsr-hunger\">25.0s<\/strong></span>
+        <span class="rsr-badge">Press Space to jump</span>
+        <span class="rsr-badge" id="rsr-ai-msg" style="display:none"></span>
+      </div>
+      <div class="rsr-wrap">
+        <div class="rsr-runner">
+          <canvas id="rsr-canvas"></canvas>
+          <div class="rsr-ground"></div>
+          <div class="rsr-overlay" id="rsr-overlay" role="dialog" aria-modal="true">
+            <div class="rsr-overlay-inner">
+              <h2>Minimum Sufficient Intelligence</h2>
+              <p>The smaller the intelligence, the more ethical it becomes.</p>
+              <p class="rsr-stats" style="margin-top:6px"></p>
+              <button class="rsr-btn" id="rsr-retry" type="button">Retry</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PDF link (centered, small) placed directly under the game -->
+        <div style="width:100%; display:flex; justify-content:center; margin-top:8px;">
+          <a href="The_18KB_AI_Redefining_Intelligence_through_Ethics_and_Autonomy.pdf" target="_blank" rel="noopener" style="font-size:12px; color:#1f2937; text-decoration:underline;">
+            The 18KB AI — Redefining Intelligence through Ethics and Autonomy (PDF) 2025-10-31
+          </a>
+        </div>
+      </div>`;
+    if(document.body?.prepend) document.body.prepend(root); else (document.body? document.body.insertBefore(root, document.body.firstChild||null) : document.documentElement.appendChild(root));
+
+    // --- Refs ---
+    const tempEl = document.getElementById('rsr-temp');
+    const scoreEl = document.getElementById('rsr-score');
+    const hungerEl = document.getElementById('rsr-hunger');
+    const overlay = document.getElementById('rsr-overlay');
+    const statsEl = overlay.querySelector('.rsr-stats');
+    const retryBtn = document.getElementById('rsr-retry');
+    const aiMsg = document.getElementById('rsr-ai-msg');
+
+    // --- Canvas ---
+    const canvas = document.getElementById('rsr-canvas');
+    const ctx = canvas.getContext('2d');
+    let W=0, H=0, DPR = Math.max(1, window.devicePixelRatio||1);
+
+    // Tunables (~3 min target)
+    const PLAYER_EMOJI = '😺'; // change to '🐱' if preferred
+    let speedBase = 300; const gravity = 2200; const jumpV = -800;
+
+    // State
+    let running = true, speedMul = 1, groundY = 0; let player = null;
+    const obstacles=[], foods=[], peaceBursts=[], missiles=[], explosions=[];
+    let score = 0, temp = 1.5, hunger = 25.0;
+    let lastSpawnObs=0, spawnObsEvery=1.4, lastSpawnFood=0, spawnFoodEvery=5.0;
+    let lastJumpAt=-999, streak=0, foodsEaten=0; let startTime = performance.now();
+
+    // Shelter
+    const shelter = { active:false, t:0, dur:3.2 }; let nextShelterIn = rand(10,14); function scheduleShelter(){ nextShelterIn = rand(14,22);}  
+
+    // --- AI persistence ---
+    const AI_KEY='rsr_ai_policy_v2';
+    // Arms: both Jump(J) and Missile(M) with decision thresholds (seconds to collision)
+    const AI_ARMS=[
+      {type:'J',t:0.34},{type:'J',t:0.30},{type:'J',t:0.26},{type:'J',t:0.22},{type:'J',t:0.18},
+      {type:'M',t:0.34},{type:'M',t:0.28},{type:'M',t:0.24},{type:'M',t:0.20},{type:'M',t:0.16}
+    ];
+    let ai = loadPolicy();
+    let aiActsLeft = chooseBudget(ai.prevSurvival||0); // 10..30
+    let lastUserInput=-999; // sec
+    let aiFireCooldown=0; // seconds between missiles
+    let pendingEval = null; // {armIdx, t}
+
+    function loadPolicy(){
+      try{ const raw=localStorage.getItem(AI_KEY); if(raw){ const o=JSON.parse(raw); if(o && Array.isArray(o.arms) && o.arms.length===AI_ARMS.length) return o; } }catch(e){}
+      return { arms: AI_ARMS.map((a,i)=>({ key:a.type+'-'+a.t, type:a.type, t:a.t, s:1, f:1 })), total:0, prevSurvival:0 };
+    }
+    function savePolicy(){ try{ localStorage.setItem(AI_KEY, JSON.stringify(ai)); }catch(e){} }
+
+    function chooseBudget(prevSec){
+      // Map last survival to assistance budget (10..30)
+      if(prevSec<=30) return 30;
+      if(prevSec<=60) return 26;
+      if(prevSec<=90) return 22;
+      if(prevSec<=120) return 18;
+      if(prevSec<=180) return 14;
+      return 10;
+    }
+
+    function pickArm(){
+      const eps = ai.total < 60 ? 0.20 : 0.10;
+      if(Math.random()<eps) return (Math.random()*AI_ARMS.length)|0;
+      let best=-1, bestIdx=0;
+      for(let i=0;i<ai.arms.length;i++){
+        const a=ai.arms[i]; const mean=a.s/(a.s+a.f); if(mean>best){ best=mean; bestIdx=i; }
+      }
+      return bestIdx;
+    }
+    function updateArm(idx, success){ const a=ai.arms[idx]; if(!a) return; success? a.s++ : a.f++; ai.total++; savePolicy(); }
+
+    function toastAI(){ aiMsg.textContent='A living example of ethical autonomy — an AI that learns and decides for survival, entirely offline.'; aiMsg.style.display='inline-block'; clearTimeout(toastAI._t); toastAI._t=setTimeout(()=>aiMsg.style.display='none',1600); }
+
+    function resize(){
+      const wrap=canvas.parentElement||root; W=wrap.clientWidth|0; H=Math.max(90,Math.min(140,Math.floor(W*0.09))); DPR=Math.max(1,window.devicePixelRatio||1);
+      canvas.width=Math.floor(W*DPR); canvas.height=Math.floor(H*DPR); canvas.style.width=W+'px'; canvas.style.height=H+'px'; ctx.setTransform(DPR,0,0,DPR,0,0);
+      groundY=H-18; const size=Math.floor(H*0.36);
+      if(!player){ player={ x:Math.floor(W*0.12), y:groundY-size, w:size*0.72, h:size, vy:0, size, emoji:'😺' }; }
+      else { player.size=size; player.w=size*0.72; player.h=size; player.y=groundY-player.h; }
+    }
+    window.addEventListener('resize',resize); resize();
+
+    function rand(min,max){ return Math.random()*(max-min)+min; }
+
+    function spawnObstacle(){ const list=['🔫','💣','🧨','🪖','🧱','🛡️']; const em=list[(Math.random()*list.length)|0]; const hMul=Math.random()<0.08?1.1:1.0; const size=Math.floor(H*(0.24*hMul)); const w=Math.max(18,Math.floor(size*0.7)); const h=Math.max(22,size); const x=W+30; const y=groundY-h+4; obstacles.push({x,y,w,h,emoji:em,size:h,awarded:false}); }
+    function spawnFood(){ const list=['🍞','🥫','🍚','🥖','🍎']; const em=list[(Math.random()*list.length)|0]; const size=Math.floor(H*0.28); const x=W+30; const lift=Math.min(40,H*0.3); const y=groundY-size-Math.random()*lift-6; foods.push({x,y,w:size*0.7,h:size,emoji:em,size}); }
+
+    function rectsIntersect(a,b){ return a.x<b.x+b.w && a.x+a.w>b.x && a.y<b.y+b.h && a.y+a.h>b.y; }
+    function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)); }
+
+    function die(){
+      running=false; streak=0; overlay.style.display='flex'; const secs=((performance.now()-startTime)/1000).toFixed(1); statsEl.textContent=`Final temp ${temp.toFixed(1)}°C · Survival ${secs}s · Food ${foodsEaten}`;
+      if(pendingEval && (performance.now()*0.001 - pendingEval.t)<1.0){ updateArm(pendingEval.idx,false); pendingEval=null; }
+      ai.prevSurvival=parseFloat(secs); savePolicy();
+    }
+
+    function reset(){
+      running=true; obstacles.length=0; foods.length=0; peaceBursts.length=0; missiles.length=0; explosions.length=0;
+      score=0; temp=1.5; hunger=20.0; speedMul=1; lastSpawnObs=0; spawnObsEvery=1.0; lastSpawnFood=0; spawnFoodEvery=6.0;
+      player.vy=0; player.y=groundY-player.h; streak=0; foodsEaten=0; startTime=performance.now();
+      shelter.active=false; shelter.t=0; scheduleShelter(); aiActsLeft=chooseBudget(ai.prevSurvival||0); aiFireCooldown=0; pendingEval=null; aiMsg.style.display='none';
+      overlay.style.display='none'; lastTime=performance.now(); requestAnimationFrame(loop);
+    }
+
+    // Input
+    window.addEventListener('keydown',(e)=>{ if(e.code==='Space'){ e.preventDefault(); if(!running) return; const onGround=player.y>=groundY-player.h-0.5; if(onGround){ player.vy=jumpV; lastJumpAt=performance.now()*0.001; lastUserInput=lastJumpAt; } } if(e.code==='KeyR'){ e.preventDefault(); reset(); } },{passive:false});
+    canvas.addEventListener('pointerdown',()=>{ const onGround=player.y>=groundY-player.h-0.5; if(running && onGround){ player.vy=jumpV; lastJumpAt=performance.now()*0.001; lastUserInput=lastJumpAt; } });
+    retryBtn.addEventListener('click',reset);
+
+    // Peace bubble
+    function burstPeace(){ peaceBursts.push({t:0,life:0.6,x:player.x+player.w*0.6,y:player.y-10}); if(peaceBursts.length>6) peaceBursts.shift(); }
+
+    // Missile helper
+    function fireMissile(){
+      const size=Math.floor(H*0.22); const y=player.y+player.h - size - 4; missiles.push({ x:player.x+player.w*0.6, y, w:size*0.8, h:size, size, emoji:'🚀', vx: 1050, born: performance.now()*0.001 }); aiFireCooldown=0.35; }
+
+    // AI controller
+    function aiController(dt, speed){
+      if(aiActsLeft<=0 || !running) return; const now=performance.now()*0.001; if(now-lastUserInput<0.12) return; if(aiFireCooldown>0){ aiFireCooldown-=dt; }
+      // nearest obstacle
+      let nearest=null, dist=Infinity; for(const o of obstacles){ const d=(o.x-(player.x+player.w)); if(d>0 && d<dist){ dist=d; nearest=o; } }
+      if(!nearest) return; const ttc=dist/speed; const idx=pickArm(); const arm=ai.arms[idx]; const onGround=player.y>=groundY-player.h-0.5;
+      if(arm.type==='J' && onGround && ttc<arm.t){ player.vy=jumpV; lastJumpAt=now; lastUserInput=now; aiActsLeft--; toastAI(); pendingEval={ idx, t: now }; }
+      else if(arm.type==='M' && aiFireCooldown<=0 && ttc<arm.t){ fireMissile(); aiActsLeft--; toastAI(); pendingEval={ idx, t: now, missile:true }; }
+      // mark success if survived ~0.9s after AI act and no failure was recorded
+      if(pendingEval && (now-pendingEval.t)>0.9 && !pendingEval.waitHit){ updateArm(pendingEval.idx,true); pendingEval=null; }
+    }
+
+    // Loop
+    let lastTime=performance.now();
+    function loop(nowMs){
+      const now=nowMs*0.001; let dt=(nowMs-lastTime)/1000; if(dt>0.05) dt=0.05; lastTime=nowMs; if(!running) return;
+
+      // Shelter
+      if(!shelter.active){ nextShelterIn-=dt; if(nextShelterIn<=0){ shelter.active=true; shelter.t=0; temp=clamp(temp-0.10,1.5,3.0);} } else { shelter.t+=dt; if(shelter.t>=shelter.dur){ shelter.active=false; scheduleShelter(); } }
+
+      // Climate
+      const baseRise=0.0032; temp=clamp(temp+(shelter.active?-0.020:baseRise)*dt*60,1.5,3.0); const diff=(temp-1.5)/1.5;
+
+      // Speed
+      const elapsed=(performance.now()-startTime)/1000; const ramp=Math.min(1,elapsed/12); speedMul=1+diff*0.4; const speed=(speedBase*(0.7+0.3*ramp))*speedMul;
+
+      // Spawns
+      spawnObsEvery=clamp(1.60 - diff*0.25, 0.90, 1.60); spawnFoodEvery=clamp(4.5 - diff*1.5, 2.0, 4.5);
+      hunger-=dt; if(hunger<0) hunger=0; if(hunger===0){ die(); }
+
+      player.vy+=gravity*dt; player.y+=player.vy*dt; if(player.y>groundY-player.h){ player.y=groundY-player.h; player.vy=0; }
+
+      lastSpawnObs+=dt; if(!shelter.active && lastSpawnObs>=spawnObsEvery){ lastSpawnObs=0; spawnObstacle(); const allowDouble=elapsed>8; if(allowDouble && Math.random()<(0.02+diff*0.05)) setTimeout(spawnObstacle,Math.floor(rand(150,300))); }
+      lastSpawnFood+=dt; if(lastSpawnFood>=spawnFoodEvery){ lastSpawnFood=0; spawnFood(); } if(hunger<12 && foods.length===0){ spawnFood(); }
+
+      // AI decide before movement integration of entities
+      aiController(dt, speed);
+
+      // Move obstacles & collisions
+      for(let i=obstacles.length-1;i>=0;i--){ const o=obstacles[i]; o.x-=speed*dt; if(rectsIntersect({x:player.x,y:player.y,w:player.w,h:player.h},{x:o.x,y:o.y,w:o.w,h:o.h})){ die(); }
+        if(!o.awarded && o.x+o.w<player.x-player.w*0.1){ o.awarded=true; if(now-lastJumpAt<0.9){ streak=Math.min(streak+1,10); burstPeace(); } }
+        if(o.x+o.w<-20) obstacles.splice(i,1); }
+
+      for(let i=foods.length-1;i>=0;i--){ const f=foods[i]; f.x-=speed*dt*0.98; if(rectsIntersect({x:player.x,y:player.y,w:player.w,h:player.h},{x:f.x,y:f.y,w:f.w,h:f.h})){ foods.splice(i,1); score+=50; hunger=20.0; foodsEaten++; } else if(f.x+f.w<-20){ foods.splice(i,1);} }
+
+      // Missiles
+      for(let i=missiles.length-1;i>=0;i--){ const m=missiles[i]; m.x+= (m.vx + speed*0.2) * dt; // outrun obstacles
+        // hit check
+        let hit=false; for(let j=obstacles.length-1;j>=0;j--){ const o=obstacles[j]; if(rectsIntersect({x:m.x,y:m.y,w:m.w,h:m.h},{x:o.x,y:o.y,w:o.w,h:o.h})){ obstacles.splice(j,1); hit=true; break; } }
+        if(hit){ explosions.push({x:m.x+ m.w*0.5, y:m.y+ m.h*0.4, t:0, life:0.35}); missiles.splice(i,1); if(pendingEval && pendingEval.missile){ updateArm(pendingEval.idx,true); pendingEval=null; } continue; }
+        if(m.x > W+60){ missiles.splice(i,1); }
+      }
+
+      // Explosions fade
+      for(let i=explosions.length-1;i>=0;i--){ const e=explosions[i]; e.t+=dt; if(e.t>e.life) explosions.splice(i,1); }
+
+      // Score
+      score += dt * (10 + 6 * diff) * speedMul + streak * dt;
+
+      // Draw
+      ctx.clearRect(0,0,W,H);
+      if(shelter.active){ ctx.globalAlpha=0.12; ctx.fillStyle='#22c55e'; ctx.fillRect(0,0,W,H); ctx.globalAlpha=1; ctx.font="12px system-ui, -apple-system, 'Noto Sans'"; ctx.fillStyle='#14532d'; ctx.fillText('Shelter',10,16); }
+      ctx.strokeStyle='#cdd6df'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(0,groundY+6); ctx.lineTo(W,groundY+6); ctx.stroke();
+      for(const f of foods){ ctx.font=Math.floor(f.size)+"px 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif"; ctx.textBaseline='bottom'; ctx.fillText(f.emoji,f.x,f.y+f.h); }
+      for(const o of obstacles){ ctx.font=Math.floor(o.size)+"px 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif"; ctx.textBaseline='bottom'; ctx.fillText(o.emoji,o.x,o.y+o.h); }
+      // missiles
+      for(const m of missiles){ ctx.font=Math.floor(m.size)+"px 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif"; ctx.textBaseline='bottom'; ctx.fillText('🚀', m.x, m.y + m.h); }
+      for(const e of explosions){ const a=1-(e.t/e.life); ctx.globalAlpha=Math.max(0,a); ctx.font=Math.floor(H*0.30)+"px 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif"; ctx.fillText('💥', e.x, e.y); ctx.globalAlpha=1; }
+      // player
+      ctx.font=Math.floor(player.size)+"px 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif"; ctx.textBaseline='bottom'; ctx.fillText(player.emoji, player.x, player.y+player.h);
+      // peace bubbles
+      for(let i=peaceBursts.length-1;i>=0;i--){ const b=peaceBursts[i]; b.t+=dt; const a=1-(b.t/b.life); if(a<=0){ peaceBursts.splice(i,1); continue;} const y=b.y-(b.t*28); const text='Peace'; ctx.globalAlpha=Math.max(0,a*0.95); const sizeBoost=Math.min(4,streak*0.2); ctx.font=(11+sizeBoost)+"px system-ui, -apple-system, 'Noto Sans', sans-serif"; const tw=ctx.measureText(text).width+10; const tx=b.x, ty=y; ctx.fillStyle='#ffffff'; ctx.strokeStyle='#d9e0e7'; ctx.lineWidth=1; roundRect(ctx, tx, ty, tw, 18+sizeBoost*0.6, 9, true, true); ctx.fillStyle='#222'; ctx.fillText(text, tx+5, ty+13); ctx.globalAlpha=1; }
+
+      // HUD
+      tempEl.textContent= temp.toFixed(1)+'°C'; hungerEl.textContent=hunger.toFixed(1)+'s'; scoreEl.textContent=Math.floor(score).toLocaleString();
+
+      requestAnimationFrame(loop);
+    }
+
+    function roundRect(ctx,x,y,w,h,r,fill,stroke){ if(w<2*r) r=w/2; if(h<2*r) r=h/2; ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); if(fill) ctx.fill(); if(stroke) ctx.stroke(); }
+
+    // Self-tests
+    console.groupCollapsed('RSR self-tests');
+    console.assert(document.getElementById('rsr-root'),'root exists');
+    console.assert(document.getElementById('rsr-canvas'),'canvas exists');
+    console.assert(!!ctx,'2D context');
+    console.assert(document.getElementById('rsr-overlay'),'overlay exists');
+    console.assert(document.getElementById('rsr-retry'),'retry exists');
+    console.assert(Array.isArray(AI_ARMS) && AI_ARMS.length>=6,'AI arms ready');
+    console.assert(typeof aiActsLeft==='number' && aiActsLeft>=10 && aiActsLeft<=30,'AI budget 10..30');
+    console.groupEnd();
+
+    requestAnimationFrame(loop);
+
+  });
+})();
+
+</script>
+
+<!-- === AI game End === -->
+
+
+
+
+   
+
+   <!-- Mouse Flight AI Simulator with Level System: embeddable block start -->
+
+<style>
+  #mouse-ai-wrapper {
+    max-width: 260px;
+    margin: 16px auto;
+    padding: 12px;
+    border-radius: 16px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+    color: #e5e7eb;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  #mouse-ai-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+
+  #mouse-ai-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+
+  #mouse-ai-status {
+    font-size: 0.7rem;
+    opacity: 0.85;
+    text-align: right;
+  }
+
+  #mouse-ai-hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.72rem;
+    margin-bottom: 6px;
+    gap: 6px;
+  }
+
+  #mouse-ai-hud-left,
+  #mouse-ai-hud-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  #mouse-ai-ai-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    font-size: 0.68rem;
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.8);
+    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  #mouse-ai-ai-badge span {
+    font-size: 0.7rem;
+  }
+
+  #mouse-ai-level-select {
+    font-size: 0.68rem;
+    padding: 1px 4px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    background: rgba(15, 23, 42, 0.9);
+    color: #e5e7eb;
+  }
+
+  #mouse-ai-canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #020617 0%, #020617 60%, #000 100%);
+  }
+
+  #mouse-ai-help {
+    margin-top: 6px;
+    font-size: 0.65rem;
+    line-height: 1.4;
+    color: #9ca3af;
+  }
+
+  #mouse-ai-help code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    background: rgba(15, 23, 42, 0.9);
+    padding: 1px 3px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+  }
+
+  #mouse-ai-container {
+    position: relative;
+  }
+
+  #mouse-ai-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  #mouse-ai-overlay-message {
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(248, 250, 252, 0.3);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+
+  .mouse-ai-auto #mouse-ai-ai-badge {
+    border-color: rgba(34, 197, 94, 0.9);
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
+  }
+
+  .mouse-ai-human #mouse-ai-ai-badge {
+    border-color: rgba(249, 115, 22, 0.9);
+    box-shadow: 0 0 6px rgba(249, 115, 22, 0.7);
+  }
+
+  .mouse-ai-suggest #mouse-ai-ai-badge {
+    animation: mouse-ai-pulse 0.9s infinite alternate;
+  }
+
+  @keyframes mouse-ai-pulse {
+    from {
+      opacity: 0.85;
+      transform: translateY(-1px) scale(1.0);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(-2px) scale(1.03);
+    }
+  }
+</style>
+
+<section id="mouse-ai-wrapper">
+  <header id="mouse-ai-header">
+    <div id="mouse-ai-title">Mouse Flight AI Simulator 🐭</div>
+    <div id="mouse-ai-status">
+      <div>Distance: <span id="mouse-ai-distance">0</span> m</div>
+      <div>Best: <span id="mouse-ai-best">0</span> m</div>
+    </div>
+  </header>
+
+  <div id="mouse-ai-hud">
+    <div id="mouse-ai-hud-left">
+      <div>Mode: <span id="mouse-ai-mode-label">AI autopilot</span></div>
+      <div>Episodes: <span id="mouse-ai-episodes">0</span></div>
+    </div>
+    <div id="mouse-ai-hud-right">
+      <div id="mouse-ai-ai-badge">
+        <span id="mouse-ai-ai-face">🤖</span>
+        <span id="mouse-ai-ai-info">Lv.1 · Trust 0%</span>
+      </div>
+      <div>
+        Learning:
+        <select id="mouse-ai-level-select">
+          <option value="1">Lv.1 – Fresh (0% learning)</option>
+          <option value="2">Lv.2 – Cautious learner</option>
+          <option value="3">Lv.3 – Trained</option>
+          <option value="4">Lv.4 – Expert</option>
+          <option value="5">Lv.5 – Master (max)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div id="mouse-ai-container">
+    <canvas id="mouse-ai-canvas" width="240" height="360"></canvas>
+    <div id="mouse-ai-overlay">
+      <div id="mouse-ai-overlay-message">
+        Default: AI mouse flies automatically.<br>
+        Space / left click: switch to human control.
+      </div>
+    </div>
+  </div>
+
+  <div id="mouse-ai-help">
+    <div>· The mouse (🐭) flies forward and tries to dodge incoming cats (🐱).</div>
+    <div>· By default the AI controls the mouse and learns from every episode.</div>
+    <div>· Press <code>Space</code> or <code>left click</code> to take over. The AI stops acting until the next round.</div>
+    <div>· Use the <strong>AI Learning</strong> level (Lv.1–Lv.5) to reset and control how strong the learning is.</div>
+  </div>
+</section>
+
+<script>
+(function () {
+  const canvas = document.getElementById("mouse-ai-canvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+
+  const wrapper = document.getElementById("mouse-ai-wrapper");
+  const distanceEl = document.getElementById("mouse-ai-distance");
+  const bestEl = document.getElementById("mouse-ai-best");
+  const modeLabelEl = document.getElementById("mouse-ai-mode-label");
+  const episodesEl = document.getElementById("mouse-ai-episodes");
+  const aiFaceEl = document.getElementById("mouse-ai-ai-face");
+  const aiInfoEl = document.getElementById("mouse-ai-ai-info");
+  const overlayEl = document.getElementById("mouse-ai-overlay");
+  const overlayMessageEl = document.getElementById("mouse-ai-overlay-message");
+  const levelSelect = document.getElementById("mouse-ai-level-select");
+
+  const WIDTH = canvas.width;
+  const HEIGHT = canvas.height;
+
+  const GRAVITY = 0.0024;
+  const JUMP_VELOCITY = -0.9;
+  const BASE_SCROLL_SPEED = 0.16;
+  const MAX_DT = 50; // ms
+
+  const ENEMY_SPAWN_BASE = 900;
+  const ENEMY_SPAWN_VAR = 650;
+  const AI_STORAGE_KEY = "mouse_flight_ai_brain_v3";
+  const BEST_DISTANCE_KEY = "mouse_flight_best_distance_v3";
+  const MAX_LEVEL = 5;
+
+  let lastTime = 0;
+  let simTime = 0;
+  let distance = 0;
+  let bestDistance = Number(localStorage.getItem(BEST_DISTANCE_KEY) || "0");
+  let gameOver = false;
+
+  const player = {
+    x: WIDTH * 0.2,
+    y: HEIGHT * 0.5,
+    vy: 0,
+    radius: 12,
+  };
+
+  let enemies = [];
+  let enemySpawnTimer = 0;
+  let difficultyLevel = 0;
+
+  let autopilot = true;
+  let lastJumpTime = 0;
+  let decisionHistory = [];
+  let humanPendingJump = false;
+  const MAX_HISTORY = 32;
+
+  let overlayTimer = null;
+
+  const aiBrain = loadBrain();
+  let aiLevel = aiBrain.currentLevel || 1;
+  if (aiLevel < 1 || aiLevel > MAX_LEVEL) aiLevel = 1;
+  aiBrain.currentLevel = aiLevel;
+
+  distanceEl.textContent = "0";
+  bestEl.textContent = Math.floor(bestDistance).toString();
+  updateAIIndicators();
+  updateModeIndicators();
+  if (levelSelect) levelSelect.value = String(aiLevel);
+  showOverlayMessage(
+    "Default: AI mouse flies automatically. Space or left click to take control."
+  );
+  resetGame();
+
+  // ---------- Persistence ----------
+
+  function loadBrain() {
+    try {
+      const raw = localStorage.getItem(AI_STORAGE_KEY);
+      if (!raw) {
+        return { stats: {}, totalSuccess: 0, totalFail: 0, episodes: 0, currentLevel: 1 };
+      }
+      const parsed = JSON.parse(raw);
+      return {
+        stats: parsed.stats || {},
+        totalSuccess: parsed.totalSuccess || 0,
+        totalFail: parsed.totalFail || 0,
+        episodes: parsed.episodes || 0,
+        currentLevel: parsed.currentLevel || 1,
+      };
+    } catch (e) {
+      console.warn("AI brain load failed", e);
+      return { stats: {}, totalSuccess: 0, totalFail: 0, episodes: 0, currentLevel: 1 };
+    }
+  }
+
+  function saveBrain() {
+    try {
+      localStorage.setItem(
+        AI_STORAGE_KEY,
+        JSON.stringify({
+          stats: aiBrain.stats,
+          totalSuccess: aiBrain.totalSuccess,
+          totalFail: aiBrain.totalFail,
+          episodes: aiBrain.episodes,
+          currentLevel: aiLevel,
+        })
+      );
+    } catch (e) {
+      console.warn("AI brain save failed", e);
+    }
+  }
+
+  // ---------- UI helpers ----------
+
+  function showOverlayMessage(text, durationMs) {
+    if (!overlayEl) return;
+    overlayMessageEl.textContent = text;
+    overlayEl.style.display = "flex";
+    if (overlayTimer) clearTimeout(overlayTimer);
+    overlayTimer = setTimeout(function () {
+      overlayEl.style.display = "none";
+    }, durationMs || 10000); // default 10 seconds
+  }
+
+  function updateAIIndicators() {
+    const totalS = aiBrain.totalSuccess || 0;
+    const totalF = aiBrain.totalFail || 0;
+    const total = totalS + totalF;
+    let trust = 0;
+    if (total > 0) trust = Math.round((totalS / total) * 100);
+
+    let face = "🤖";
+    if (aiLevel >= 5) face = "🧠";
+    else if (aiLevel === 4) face = "😼";
+    else if (aiLevel === 3) face = "🙂";
+    else face = "🤖";
+
+    aiFaceEl.textContent = face;
+    aiInfoEl.textContent = "Lv." + aiLevel + " · Trust " + trust + "%";
+    episodesEl.textContent = (aiBrain.episodes || 0).toString();
+
+    if (levelSelect && levelSelect.value !== String(aiLevel)) {
+      levelSelect.value = String(aiLevel);
+    }
+  }
+
+  function updateModeIndicators() {
+    if (autopilot && !gameOver) {
+      modeLabelEl.textContent = "AI autopilot";
+      wrapper.classList.add("mouse-ai-auto");
+      wrapper.classList.remove("mouse-ai-human");
+    } else if (!gameOver) {
+      modeLabelEl.textContent = "Human control";
+      wrapper.classList.remove("mouse-ai-auto");
+      wrapper.classList.add("mouse-ai-human");
+    } else {
+      modeLabelEl.textContent = "Game over";
+      wrapper.classList.remove("mouse-ai-auto");
+      wrapper.classList.remove("mouse-ai-human");
+    }
+  }
+
+  function applyManualLevel(levelValue) {
+    const lvl = Number(levelValue);
+    if (!Number.isFinite(lvl) || lvl < 1 || lvl > MAX_LEVEL) return;
+
+    // Reset all learned experience
+    aiBrain.stats = {};
+    aiBrain.totalSuccess = 0;
+    aiBrain.totalFail = 0;
+    aiBrain.episodes = 0;
+    aiLevel = lvl;
+    saveBrain();
+    updateAIIndicators();
+    resetGame();
+    showOverlayMessage(
+      "AI learning level set to Lv." +
+        lvl +
+        ". Experience has been reset and a new training phase begins."
+    );
+  }
+
+  if (levelSelect) {
+    levelSelect.addEventListener("change", function (e) {
+      applyManualLevel(e.target.value);
+    });
+  }
+
+  // ---------- Game reset ----------
+
+  function resetGame() {
+    enemies = [];
+    enemySpawnTimer = 600;
+    distance = 0;
+    difficultyLevel = 0;
+    simTime = 0;
+    decisionHistory = [];
+    humanPendingJump = false;
+    lastJumpTime = 0;
+
+    player.x = WIDTH * 0.2;
+    player.y = HEIGHT * 0.5;
+    player.vy = 0;
+    distanceEl.textContent = "0";
+
+    gameOver = false;
+    autopilot = true; // new round always starts with AI control
+    updateModeIndicators();
+  }
+
+  // ---------- World / enemies ----------
+
+  function spawnEnemy() {
+    const y = 40 + Math.random() * (HEIGHT - 80);
+    const speed = BASE_SCROLL_SPEED + 0.035 * difficultyLevel + Math.random() * 0.05;
+    enemies.push({
+      x: WIDTH + 40,
+      y: y,
+      vx: speed,
+      passed: false,
+    });
+  }
+
+  function updateDifficulty() {
+    const newLevel = Math.floor(distance / 300);
+    if (newLevel > difficultyLevel) difficultyLevel = newLevel;
+  }
+
+  function getNearestThreat() {
+    let nearest = null;
+    let minDx = Infinity;
+    for (const e of enemies) {
+      const dx = e.x - player.x;
+      if (dx >= 0 && dx < minDx) {
+        minDx = dx;
+        nearest = e;
+      }
+    }
+    return nearest;
+  }
+
+  // ---------- State & RL ----------
+
+  function makeStateKey() {
+    const threat = getNearestThreat();
+    if (!threat) return "none";
+    const dx = threat.x - player.x;
+    const dy = threat.y - player.y;
+
+    let distBucket = 2;
+    if (dx < WIDTH * 0.25) distBucket = 0;
+    else if (dx < WIDTH * 0.5) distBucket = 1;
+
+    let dyBucket = 1;
+    if (dy < -20) dyBucket = 0;
+    else if (dy > 20) dyBucket = 2;
+
+    return dyBucket + ":" + distBucket;
+  }
+
+  function ensureState(stateKey) {
+    const stats = (aiBrain.stats[stateKey] = aiBrain.stats[stateKey] || {
+      jump: { s: 0, f: 0 },
+      stay: { s: 0, f: 0 },
+    });
+    return stats;
+  }
+
+  function getActionStats(stateKey, action) {
+    const stats = ensureState(stateKey);
+    return stats[action];
+  }
+
+  function rlPolicy(stateKey) {
+    if (stateKey === "none") return "stay";
+
+    // Learning strength: higher level => lower exploration
+    const epsLevelPart = 0.30 - (aiLevel - 1) * 0.05; // Lv1:0.30, Lv5:0.10
+    const eps = Math.max(0.04, epsLevelPart);
+
+    if (Math.random() < eps) {
+      return Math.random() < 0.5 ? "jump" : "stay";
+    }
+
+    const js = getActionStats(stateKey, "jump");
+    const ss = getActionStats(stateKey, "stay");
+    const jCount = js.s + js.f;
+    const sCount = ss.s + ss.f;
+    const jRate = jCount > 0 ? js.s / jCount : 0.5;
+    const sRate = sCount > 0 ? ss.s / sCount : 0.5;
+
+    if (jRate > sRate) return "jump";
+    if (sRate > jRate) return "stay";
+    return Math.random() < 0.5 ? "jump" : "stay";
+  }
+
+  function recordDecision(stateKey, action) {
+    decisionHistory.push({ stateKey: stateKey, action: action });
+    if (decisionHistory.length > MAX_HISTORY) decisionHistory.shift();
+  }
+
+  function updateAutoLevel() {
+    const s = aiBrain.totalSuccess || 0;
+    let target = 1;
+    if (s > 20) target = 2;
+    if (s > 60) target = 3;
+    if (s > 140) target = 4;
+    if (s > 260) target = 5;
+
+    if (target > aiLevel) {
+      aiLevel = target;
+      saveBrain();
+      updateAIIndicators();
+      showOverlayMessage("AI has improved its learning to Lv." + aiLevel + ".");
+    } else {
+      saveBrain();
+      updateAIIndicators();
+    }
+  }
+
+  function rewardHistory(kind) {
+    if (decisionHistory.length === 0) return;
+    const isSuccess = kind === "success";
+    for (const d of decisionHistory) {
+      const stats = getActionStats(d.stateKey, d.action);
+      if (isSuccess) {
+        stats.s += 1;
+        aiBrain.totalSuccess += 1;
+      } else {
+        stats.f += 1;
+        aiBrain.totalFail += 1;
+      }
+    }
+    if (!isSuccess) {
+      aiBrain.episodes += 1;
+    }
+    updateAutoLevel();
+  }
+
+  function simulateSafety(action) {
+    const nearEnemies = enemies.filter(function (e) {
+      return e.x > player.x - 10 && e.x < player.x + 220;
+    });
+    if (nearEnemies.length === 0) return 9999;
+
+    const horizon = 600; // ms
+    const step = 40; // ms
+    let y = player.y;
+    let vy = player.vy;
+    const top = 30;
+    const bottom = HEIGHT - 30;
+    let minClearance = Infinity;
+
+    for (let t = 0; t <= horizon; t += step) {
+      if (t === 0 && action === "jump") {
+        vy = JUMP_VELOCITY;
+      }
+      vy += GRAVITY * step;
+      y += vy * step;
+      if (y < top) {
+        y = top;
+        vy = 0;
+      }
+      if (y > bottom) {
+        y = bottom;
+        vy = 0;
+      }
+      for (const e of nearEnemies) {
+        const ex = e.x - e.vx * t;
+        const ey = e.y;
+        const dx = ex - player.x;
+        const dy = ey - y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < minClearance) minClearance = dist;
+      }
+    }
+    return minClearance;
+  }
+
+  function aiStep() {
+    const now = simTime;
+    const threat = getNearestThreat();
+
+    if (!threat) {
+      const center = HEIGHT * 0.5;
+      const diff = player.y - center;
+      if (diff > 30 && now - lastJumpTime > 220) {
+        player.vy = JUMP_VELOCITY;
+        lastJumpTime = now;
+        recordDecision("none", "jump");
+      } else {
+        recordDecision("none", "stay");
+      }
+      wrapper.classList.remove("mouse-ai-suggest");
+      return;
+    }
+
+    const stateKey = makeStateKey();
+    const safetyStay = simulateSafety("stay");
+    const safetyJump = simulateSafety("jump");
+    const SAFETY_MARGIN = 8;
+    let action;
+
+    if (safetyJump === 9999 && safetyStay === 9999) {
+      action = rlPolicy(stateKey);
+    } else {
+      const diff = safetyJump - safetyStay;
+      if (Math.abs(diff) > SAFETY_MARGIN) {
+        action = diff > 0 ? "jump" : "stay";
+      } else {
+        action = rlPolicy(stateKey);
+      }
+
+      if (diff > SAFETY_MARGIN && safetyJump < 9999) {
+        wrapper.classList.add("mouse-ai-suggest");
+      } else {
+        wrapper.classList.remove("mouse-ai-suggest");
+      }
+    }
+
+    if (action === "jump" && now - lastJumpTime > 180) {
+      player.vy = JUMP_VELOCITY;
+      lastJumpTime = now;
+    }
+
+    recordDecision(stateKey, action);
+  }
+
+  function humanObserveStep() {
+    const stateKey = makeStateKey();
+    const action = humanPendingJump ? "jump" : "stay";
+    recordDecision(stateKey, action);
+    humanPendingJump = false;
+  }
+
+  // ---------- Collisions ----------
+
+  function collideCircles(ax, ay, ar, bx, by, br) {
+    const dx = ax - bx;
+    const dy = ay - by;
+    return dx * dx + dy * dy < (ar + br) * (ar + br);
+  }
+
+  function checkCollisions() {
+    for (const e of enemies) {
+      if (collideCircles(player.x, player.y, player.radius, e.x, e.y, 12)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function handleGameOver() {
+    gameOver = true;
+    wrapper.classList.remove("mouse-ai-suggest");
+    updateModeIndicators();
+    if (distance > bestDistance) {
+      bestDistance = distance;
+      localStorage.setItem(BEST_DISTANCE_KEY, String(Math.floor(bestDistance)));
+      bestEl.textContent = Math.floor(bestDistance).toString();
+    }
+    showOverlayMessage(
+      "The mouse crashed. AI has learned from this episode. Press Space or click to start a new round."
+    );
+  }
+
+  // ---------- Game loop ----------
+
+  function update(dt) {
+    if (gameOver) return;
+
+    simTime += dt;
+
+    if (autopilot) {
+      aiStep();
+    } else {
+      humanObserveStep();
+    }
+
+    player.vy += GRAVITY * dt;
+    player.y += player.vy * dt;
+
+    const top = 30;
+    const bottom = HEIGHT - 30;
+    if (player.y < top) {
+      player.y = top;
+      player.vy = 0;
+    }
+    if (player.y > bottom) {
+      player.y = bottom;
+      player.vy = 0;
+    }
+
+    distance += BASE_SCROLL_SPEED * dt * 0.06;
+    distanceEl.textContent = Math.floor(distance).toString();
+    updateDifficulty();
+
+    enemySpawnTimer -= dt;
+    if (enemySpawnTimer <= 0) {
+      spawnEnemy();
+      const base = ENEMY_SPAWN_BASE - difficultyLevel * 60;
+      enemySpawnTimer = Math.max(320, base) + Math.random() * ENEMY_SPAWN_VAR;
+    }
+
+    for (const e of enemies) {
+      e.x -= e.vx * dt;
+      if (!e.passed && e.x < player.x) {
+        e.passed = true;
+        rewardHistory("success");
+      }
+    }
+    enemies = enemies.filter(function (e) {
+      return e.x > -40;
+    });
+
+    if (checkCollisions()) {
+      rewardHistory("fail");
+      handleGameOver();
+    }
+  }
+
+  function drawBackground() {
+    const grd = ctx.createLinearGradient(0, 0, 0, HEIGHT);
+    grd.addColorStop(0, "#020617");
+    grd.addColorStop(0.5, "#020617");
+    grd.addColorStop(1, "#000000");
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+    const starsCount = 18;
+    ctx.fillStyle = "rgba(248, 250, 252, 0.28)";
+    for (let i = 0; i < starsCount; i++) {
+      const x = ((i * 53 + Math.floor(distance)) % WIDTH) | 0;
+      const y = (i * 31) % HEIGHT;
+      ctx.fillRect(x, y, 1, 1);
+    }
+
+    ctx.fillStyle = "rgba(15, 23, 42, 0.9)";
+    ctx.fillRect(0, HEIGHT - 28, WIDTH, 28);
+  }
+
+  function drawEnemies() {
+    ctx.font = "20px system-ui, Apple Color Emoji, Segoe UI Emoji";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    for (const e of enemies) {
+      ctx.save();
+      ctx.translate(e.x, e.y);
+      ctx.fillText("🐱", 0, 0);
+      ctx.restore();
+    }
+  }
+
+  function drawPlayer() {
+    ctx.save();
+    ctx.translate(player.x, player.y);
+    ctx.font = "22px system-ui, Apple Color Emoji, Segoe UI Emoji";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("🐭", 0, 0);
+    ctx.restore();
+  }
+
+  function render() {
+    drawBackground();
+    drawEnemies();
+    drawPlayer();
+  }
+
+  function loop(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    let dt = timestamp - lastTime;
+    lastTime = timestamp;
+    if (dt > MAX_DT) dt = MAX_DT;
+    update(dt);
+    render();
+    requestAnimationFrame(loop);
+  }
+
+  // ---------- Input ----------
+
+  function humanTakeOver() {
+    if (gameOver) {
+      resetGame();
+      showOverlayMessage("New round. AI autopilot is active again.");
+      return;
+    }
+    if (autopilot) {
+      autopilot = false;
+      updateModeIndicators();
+      showOverlayMessage("Human control enabled. AI is now observing your play.");
+    }
+  }
+
+  function onKeyDown(e) {
+    if (e.code === "Space") {
+      e.preventDefault();
+      if (gameOver) {
+        humanTakeOver();
+      } else {
+        humanTakeOver();
+        player.vy = JUMP_VELOCITY;
+        humanPendingJump = true;
+      }
+    }
+  }
+
+  function onMouseDown(e) {
+    if (e.button === 0) {
+      if (gameOver) {
+        humanTakeOver();
+      } else {
+        humanTakeOver();
+        player.vy = JUMP_VELOCITY;
+        humanPendingJump = true;
+      }
+    }
+  }
+
+  canvas.addEventListener("mousedown", onMouseDown);
+  canvas.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+  });
+  window.addEventListener("keydown", onKeyDown);
+
+  requestAnimationFrame(loop);
+})();
+</script>
+
+<!-- Mouse Flight AI Simulator with Level System: embeddable block end -->
+
+
+
+   
+
+   
   
 
   
@@ -1050,7 +2192,7 @@ Should you seek a precise and in-depth understanding of the foundational princip
     <section id="contact" class="card" aria-labelledby="contactTitle">
       <h2 id="contactTitle">Contact🤝Partnerships always welcome! Free partnerships available.</h2>
       <p>👨We can provide the 260‑page technical dossier upon request, By joining Folk❤️Game, 100% free partnerships are available.</p>
-      <p>Email: <a href="mailto:contact@mcorpai.org">contact@mcorpai.org</a></p>
+      <p> Official email : <a href="mailto:contact@mcorpai.org"> ✉️ contact@mcorpai.org </a> Backup email (personal) 📧 gyumin.jeon.childsafe@gmail.com </p>
       <p class="meta"> Compliance note: The language here is intentionally phrased to reflect the design intent — that the system is structured to align with compliance principles and does not collect personal data. Final policies will be confirmed in consultation with implementing partners.</p>
     </section>
   </main>
@@ -4176,9 +5318,652 @@ Prepared extension points for **CSV/JSON import, threshold-setting UI, and mesh-
     <p>No. The project is public‑interest oriented; partnerships focus on rights, safety, and resilience rather than monetization.</p>
   </section>
 
-  
+ </section>
+<p style="color: #2ecc71;">🛠️ Last updated: October 31, 2025 🎮 The Tetris never stops. 🌍 The climate crisis doesn’t stop either 🔥 </p>
+</section>
+
+   
+<!-- 
+   구글·빙·네이버 모두 페이지 안의 문장 중
+“Updated”, “Modified”, “Last updated”, “Revised”
+같은 단어를 자동 인식합니다.
+
+사람이 보기에도 “이 페이지는 관리 중이다”라는 신호지만,
+검색엔진 알고리즘에도 직접 긍정 반영됩니다.
+
+   p 태그 하나라도 추가되면 파일의 해시(hash) 와 최종 수정일(Last-Modified) 헤더가 변경됩니다.
+   
+   이 문구는 매달 날짜만 바꿔도 신뢰도 갱신 효과가 유지됩니다.
+   2~3개월마다 간단한 게임 갱신, SEO 검색 누적을 위해서 
+예:
+🛠️ Last updated: November 30, 2025
+— 이런 식으로 한 달에 한 번 바꿔주는 것만으로도
+구글은 “지속 유지 중(active maintenance)” 사이트로 분류합니다.
+   
+   -->
+   
+<!-- 
+   
+   너가 짠 코드에 난이도를 크게 올려주고, 한국어를 영문으로 바꿔줘. 
+   다시 오류 검사해주고, <html> 작성하지 말고, index.html 아래에다 바로 붙여 넣을 수 있게 
+   <style>이나 <script> 시작해서 </script> 끝나게 만들어줘. 그리고 테트리스에다가 간단한 효과를 이모티콘 넣어서 만들어줘. 
+   이를테면 지구 이모티콘 만들어주고, 시간 제한을 만드는거지. 즉 기후가 높아질수록 속도가 빨라지는거야. 지구 기후 온도 1.5도는 속도가 느리지만, 
+   3도는 테트리스 속도가 매우 높아지는거지. 영어로 지구 기후 온도 작성해주고, 1.5도에서 3도까지 10초 간격으로 0.1도씩 올라가면서 테트리스 속도를 빠르게 해줘.
+
+키보드는 제거해주고, 오로지 마우스로 왼쪽 버튼과 오른쪽 버튼으로만 조작하게 다시 만드는거야. 즉, 키보드 조작은 전부 삭제해줘. 오로지 마우스 오른쪽과 마우스 왼쪽으로만 게임을 조작하는거야.
+마우스 왼쪽은 테트리스 도형이 바뀌고, 마우스 오른쪽은 빠르기 테트리스 도형 내리기. 그리고 상하 좌우 이동은 마우스를 이동하면 도형도 왼쪽 오른쪽으로 이동하게 무슨말인지 알아?
+
+   아래 코드 구조를 분석하고 indtex.html 붙여 넣을 수 있게 <style>이나 <script> 시작해서 </script> 끝나게 만들어줘
+   
+   -->
+
+<style>
+  /* Wraptris — Canvas Tetris with Climate Timer (mouse-only build) */
+  #wraptris-app{display:flex;gap:16px;align-items:flex-start;margin:24px auto;padding:0 16px;max-width:820px;font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Malgun Gothic,sans-serif;color:#e5e7eb}
+  #wraptris-app canvas{background:#0f172a;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.25);touch-action:none;cursor:crosshair}
+  #wraptris-app .hud{min-width:240px}
+  #wraptris-app .title{margin:0 0 8px;font-weight:800;font-size:20px;letter-spacing:.2px}
+  #wraptris-app .card{margin:12px 0;padding:10px 12px;border-radius:10px;background:#111827;border:1px solid rgba(255,255,255,.06)}
+  #wraptris-app .muted{color:#9ca3af}
+  #wraptris-app .btn{display:inline-block;margin-top:8px;padding:8px 10px;border-radius:8px;background:#1d4ed8;color:white;text-decoration:none;font-weight:700}
+</style>
+
+<script>
+(() => {
+  if (window.__wraptrisMounted) return;
+
+  const boot = () => {
+    if (window.__wraptrisMounted) return;
+    window.__wraptrisMounted = true;
+
+    // ====== Difficulty & Climate Settings ======
+    const COLS = 10;
+    const ROWS = 20;
+    const CELL = 32; // px per cell
+    const START_SPEED = 650; // base ms per drop (higher = slower)
+    const SPEED_FACTOR = 0.80; // per-level multiplier (stronger than usual)
+    const MIN_SPEED = 60;      // hard cap (very fast)
+    const LEVEL_UP_EVERY = 8;  // lines per level (tighter leveling)
+
+    // Climate timer: 🌍 1.5°C -> 3.0°C, +0.1°C every 10s
+    const C_START = 1.5, C_END = 3.0, C_STEP = 0.1, C_STEP_MS = 10000;
+    const C_STEPS = Math.round((C_END - C_START) / C_STEP); // 15 steps
+    const C_TOTAL_MS = C_STEPS * C_STEP_MS; // 150000 ms
+
+    // Mouse-only options
+    // LEFT_CLICK_MODE: 'rotate' or 'cycle' — current build defaults to rotate.
+    const LEFT_CLICK_MODE = 'rotate';
+    const FAST_DROP_MULT = 0.25; // right-click hold multiplier on gravity
+
+    // ====== Build minimal UI (English) ======
+    if (!document.body){
+      const body = document.createElement('body');
+      document.documentElement.appendChild(body);
+    }
+
+    const app = document.getElementById('wraptris-app') || (function(){
+      const div = document.createElement('div');
+      div.id = 'wraptris-app';
+      document.body.appendChild(div);
+      return div;
+    })();
+
+    // Canvas
+    const canvas = document.createElement('canvas');
+    canvas.id = 'wraptris-canvas';
+    canvas.width = COLS * CELL; // 320
+    canvas.height = ROWS * CELL; // 640
+    const ctx = canvas.getContext('2d');
+
+    // HUD
+    const hud = document.createElement('div');
+    hud.className = 'hud';
+    const h1 = document.createElement('h1');
+    h1.className = 'title';
+    h1.textContent = 'Wraptris';
+
+    const scoreCard = document.createElement('div');
+    scoreCard.className = 'card';
+    scoreCard.innerHTML = `
+      <div><strong>Score</strong> <span id="wt-score">0</span></div>
+      <div><strong>Lines</strong> <span id="wt-lines">0</span></div>
+      <div><strong>Level</strong> <span id="wt-level">1</span></div>
+      <hr style="border:0;border-top:1px solid rgba(255,255,255,.08);margin:10px 0;">
+      <div><span style="font-size:18px">🌍</span> <strong>Global Temp</strong> <span id="wt-temp">1.5°C</span></div>
+      <div><strong>Climate Timer</strong> <span id="wt-ctimer">02:30</span></div>
+    `;
+
+    const help = document.createElement('div');
+    help.className = 'card';
+    help.innerHTML = `
+      <div class="muted">Mouse Controls Only</div>
+      <div>Move mouse over the canvas to move the piece horizontally.</div>
+      <div>Left click: change piece (default: rotate 90°).</div>
+      <div>Right click and hold: fast drop (gravity boost).</div>
+      <hr style="border:0;border-top:1px solid rgba(255,255,255,.08);margin:10px 0;">
+      <div class="muted">Walls wrap horizontally (off one side → appear on the other).</div>
+    `;
+
+    const restartBtn = document.createElement('a');
+    restartBtn.href = '#';
+    restartBtn.className = 'btn';
+    restartBtn.textContent = 'Restart';
+
+    hud.append(h1, scoreCard, help, restartBtn);
+    app.append(canvas, hud);
+
+    window.__wraptrisAppRef = app;
+    window.__wraptrisCanvasRef = canvas;
+
+    // ====== Game Data ======
+    const COLORS = ['#00f5d4', '#ffd166', '#80ed99', '#ef476f', '#8ecae6', '#f72585', '#b388eb'];
+    const SHAPES = {
+      I: [[[-1,0],[0,0],[1,0],[2,0]], [[0,-1],[0,0],[0,1],[0,2]], [[-1,0],[0,0],[1,0],[2,0]], [[0,-1],[0,0],[0,1],[0,2]]],
+      O: [[[0,0],[1,0],[0,1],[1,1]], [[0,0],[1,0],[0,1],[1,1]], [[0,0],[1,0],[0,1],[1,1]], [[0,0],[1,0],[0,1],[1,1]]],
+      S: [[[0,0],[1,0],[-1,1],[0,1]], [[0,-1],[0,0],[1,0],[1,1]], [[0,0],[1,0],[-1,1],[0,1]], [[0,-1],[0,0],[1,0],[1,1]]],
+      Z: [[[-1,0],[0,0],[0,1],[1,1]], [[1,-1],[0,0],[1,0],[0,1]], [[-1,0],[0,0],[0,1],[1,1]], [[1,-1],[0,0],[1,0],[0,1]]],
+      J: [[[-1,0],[0,0],[1,0],[-1,1]], [[0,-1],[0,0],[0,1],[1,-1]], [[1,-1],[-1,0],[0,0],[1,0]], [[-1,1],[0,-1],[0,0],[0,1]]],
+      L: [[[-1,0],[0,0],[1,0],[1,1]], [[0,-1],[0,0],[0,1],[1,1]], [[-1,-1],[-1,0],[0,0],[1,0]], [[-1,-1],[0,-1],[0,0],[0,1]]],
+      T: [[[-1,0],[0,0],[1,0],[0,1]], [[0,-1],[0,0],[0,1],[1,0]], [[0,-1],[-1,0],[0,0],[1,0]], [[-1,0],[0,-1],[0,0],[0,1]]]
+    };
+    const TYPES = Object.keys(SHAPES);
+
+    let board, bag, piece;
+    let score, lines, level;
+    let gameOver = false;
+
+    // Climate & effects
+    let climateTemp, climateEpoch, climateTick, climateTimerId = null;
+    let flashUntil = 0;
+    let fastDropActive = false;
+
+    const particles = [];
+    function spawnParticles(px, py, count, emojiList){
+      for(let i=0;i<count;i++){
+        particles.push({
+          x:px, y:py,
+          vx:(Math.random()*2-1)*1.2,
+          vy:(-Math.random()*1.5)-0.6,
+          life:800 + Math.random()*600,
+          born: performance.now(),
+          char: emojiList[Math.floor(Math.random()*emojiList.length)],
+          size: 18 + Math.random()*10
+        });
+      }
+    }
+
+    // ====== Helpers ======
+    function makePiece(type){
+      const idx = TYPES.indexOf(type);
+      return { type, color: COLORS[idx], rot:0, x: Math.floor(COLS/2), y: -2 };
+    }
+    function eachBlock(p, fn){
+      const shape = SHAPES[p.type][p.rot];
+      for(const [dx,dy] of shape){
+        const x = ((p.x + dx) % COLS + COLS) % COLS;
+        const y = p.y + dy;
+        fn(x,y);
+      }
+    }
+    function valid(p){
+      let ok = true;
+      eachBlock(p,(x,y)=>{
+        if (y >= ROWS) ok = false; else if (y>=0 && board[y][x]) ok = false;
+      });
+      return ok;
+    }
+    function nextType(){
+      if (!bag.length){
+        bag = TYPES.slice();
+        for(let i=bag.length-1;i>0;i--){
+          const j = Math.floor(Math.random()*(i+1));
+          [bag[i],bag[j]] = [bag[j],bag[i]];
+        }
+      }
+      return bag.pop();
+    }
+
+    function lockPiece(){
+      eachBlock(piece,(x,y)=>{ if (y>=0) board[y][x] = TYPES.indexOf(piece.type)+1; });
+      const clearedInfo = clearLines();
+      spawn();
+      if (clearedInfo.cleared>0){
+        const emojis = clearedInfo.cleared>=4 ? ['🔥','💥','✨','🌋'] : ['✨','💫','⭐'];
+        spawnParticles(canvas.width/2, (clearedInfo.avgY+0.5)*CELL, 18 + clearedInfo.cleared*6, emojis);
+      }
+    }
+
+    function clearLines(){
+      let cleared = 0; let ySum = 0;
+      for(let y=ROWS-1;y>=0;y--){
+        if (board[y].every(v=>v!==0)){
+          board.splice(y,1); board.unshift(Array(COLS).fill(0));
+          cleared++; ySum += y; y++;
+        }
+      }
+      if (cleared>0){
+        const table = [0, 120, 360, 800, 1400];
+        score += table[cleared] * level;
+        lines += cleared;
+        const nextLevel = Math.floor(lines/LEVEL_UP_EVERY)+1;
+        if (nextLevel>level){ level = nextLevel; }
+        updateHUD();
+      }
+      return { cleared, avgY: cleared? ySum/cleared : ROWS/2 };
+    }
+
+    function spawn(){
+      piece = makePiece(nextType());
+      if (!valid(piece)) gameOver = true;
+    }
+
+    function rotate(dir){
+      const saved = piece.rot;
+      piece.rot = (piece.rot + dir + 4) % 4;
+      if (valid(piece)) return;
+      const kicks = [-1,1,-2,2,-3,3];
+      for(const k of kicks){
+        const ox = piece.x;
+        piece.x = ((piece.x + k) % COLS + COLS) % COLS;
+        if (valid(piece)) return; piece.x = ox;
+      }
+      piece.rot = saved;
+    }
+
+    function cycleType(){
+      const currentIdx = TYPES.indexOf(piece.type);
+      const newType = TYPES[(currentIdx + 1) % TYPES.length];
+      const candidate = { ...piece, type: newType, rot: 0, color: COLORS[(currentIdx + 1) % COLORS.length] };
+      if (valid(candidate)) { piece = candidate; return; }
+      // try small horizontal adjustments to accommodate width differences
+      for (const dx of [1,-1,2,-2,3,-3]){
+        const alt = { ...candidate, x: ((candidate.x + dx) % COLS + COLS) % COLS };
+        if (valid(alt)) { piece = alt; return; }
+      }
+      // if still invalid, keep original piece
+    }
+
+    function moveToColumn(col){
+      // Clamp and seek nearest valid x around the target column
+      col = Math.max(0, Math.min(COLS-1, col));
+      const target = { ...piece, x: col };
+      if (valid(target)) { piece = target; return; }
+      for (let d=1; d<=4; d++){
+        const left = { ...target, x: Math.max(0, col - d) };
+        if (valid(left)) { piece = left; return; }
+        const right = { ...target, x: Math.min(COLS-1, col + d) };
+        if (valid(right)) { piece = right; return; }
+      }
+      // if no valid position found in small neighborhood, do nothing
+    }
+
+    function softDrop(){
+      const p = { ...piece, y: piece.y + 1 };
+      if (valid(p)) piece = p; else lockPiece();
+    }
+
+    function hardDrop(){
+      let y = piece.y; while(true){ const p = { ...piece, y: y+1 }; if (valid(p)) y++; else break; }
+      piece.y = y; lockPiece(); score += 2*level; updateHUD();
+    }
+
+    // Dynamic drop interval from level & climate & fast-drop
+    function computeDropInterval(){
+      const levelFactor = Math.pow(SPEED_FACTOR, Math.max(0, level-1));
+      const norm = Math.min(1, Math.max(0, (climateTemp - C_START) / (C_END - C_START)));
+      const climateMult = 1 - 0.7 * norm; // 1.0 -> 0.3
+      let interval = START_SPEED * levelFactor * climateMult;
+      if (fastDropActive) interval *= FAST_DROP_MULT;
+      return Math.max(MIN_SPEED, Math.floor(interval));
+    }
+
+    // HUD helpers
+    const elScore = ()=>document.getElementById('wt-score');
+    const elLines = ()=>document.getElementById('wt-lines');
+    const elLevel = ()=>document.getElementById('wt-level');
+    const elTemp  = ()=>document.getElementById('wt-temp');
+    const elCTimer= ()=>document.getElementById('wt-ctimer');
+
+    function updateHUD(){
+      elScore().textContent = String(score);
+      elLines().textContent = String(lines);
+      elLevel().textContent = String(level);
+      elTemp().textContent  = `${climateTemp.toFixed(1)}°C`;
+    }
+    function updateClimateTimer(now){
+      const elapsed = Math.max(0, now - climateEpoch);
+      const remain = Math.max(0, C_TOTAL_MS - elapsed);
+      const m = Math.floor(remain/60000), s = Math.floor((remain%60000)/1000);
+      elCTimer().textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    }
+
+    // ====== Drawing ======
+    function drawCell(x,y,color){
+      const px = x*CELL, py = y*CELL;
+      ctx.fillStyle = color; ctx.fillRect(px, py, CELL, CELL);
+      ctx.fillStyle = 'rgba(255,255,255,.12)'; ctx.fillRect(px, py, CELL, 4);
+      ctx.fillStyle = 'rgba(0,0,0,.2)'; ctx.fillRect(px, py + CELL - 4, CELL, 4);
+      ctx.fillStyle = 'rgba(255,255,255,.06)'; ctx.fillRect(px+3, py+3, CELL-6, CELL-6);
+    }
+    function drawGrid(){
+      ctx.strokeStyle = 'rgba(255,255,255,.06)'; ctx.lineWidth = 1;
+      for(let x=1;x<COLS;x++){ ctx.beginPath(); ctx.moveTo(x*CELL+.5,0); ctx.lineTo(x*CELL+.5,ROWS*CELL); ctx.stroke(); }
+      for(let y=1;y<ROWS;y++){ ctx.beginPath(); ctx.moveTo(0,y*CELL+.5); ctx.lineTo(COLS*CELL,y*CELL+.5); ctx.stroke(); }
+    }
+    function overlay(text){
+      ctx.save();
+      ctx.fillStyle = 'rgba(0,0,0,.5)';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle = '#fff';
+      ctx.textAlign='center';
+      ctx.textBaseline='middle';
+      ctx.font='bold 32px system-ui, sans-serif';
+      const lines = text.split('\n');
+      lines.forEach((t,i)=>ctx.fillText(t, canvas.width/2, canvas.height/2 + i*36));
+      ctx.restore();
+    }
+
+    function drawParticles(now){
+      for(let i=particles.length-1;i>=0;i--){
+        const p = particles[i];
+        const age = now - p.born;
+        if (age > p.life){ particles.splice(i,1); continue; }
+        const t = age / p.life;
+        p.x += p.vx; p.y += p.vy; p.vy += 0.035; // gravity
+        ctx.globalAlpha = 1 - t;
+        ctx.font = `${p.size}px system-ui, emoji`;
+        ctx.fillText(p.char, p.x, p.y);
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    function drawBoard(now){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+
+      // Subtle heat tint based on climate
+      const norm = Math.min(1, Math.max(0, (climateTemp - C_START) / (C_END - C_START)));
+      const heat = Math.floor(20 + norm*60);
+      ctx.fillStyle = `rgba(255,80,0,${(heat/255)*0.06})`;
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+
+      // Portal columns
+      const gradL = ctx.createLinearGradient(0,0,CELL,0);
+      gradL.addColorStop(0,'rgba(255,255,255,.06)'); gradL.addColorStop(1,'rgba(255,255,255,0)');
+      ctx.fillStyle = gradL; ctx.fillRect(0,0,CELL,ROWS*CELL);
+      const gradR = ctx.createLinearGradient(canvas.width-CELL,0,canvas.width,0);
+      gradR.addColorStop(0,'rgba(255,255,255,0)'); gradR.addColorStop(1,'rgba(255,255,255,.06)');
+      ctx.fillStyle = gradR; ctx.fillRect(canvas.width-CELL,0,CELL,ROWS*CELL);
+
+      // Fixed blocks
+      for(let y=0;y<ROWS;y++){
+        for(let x=0;x<COLS;x++){
+          const v = board[y][x]; if (v) drawCell(x,y,COLORS[v-1]);
+        }
+      }
+
+      // Ghost
+      if (piece){
+        let gy = piece.y; while(true){ const p = { ...piece, y: gy+1 }; if (valid(p)) gy++; else break; }
+        ctx.globalAlpha = 0.25; eachBlock({ ...piece, y: gy }, (x,y)=>{ if (y>=0) drawCell(x,y,piece.color); }); ctx.globalAlpha = 1;
+      }
+
+      // Current piece
+      if (piece){ eachBlock(piece,(x,y)=>{ if (y>=0) drawCell(x,y,piece.color); }); }
+
+      drawGrid();
+
+      // 🌍 badge and live temp at top-left
+      ctx.font = '20px system-ui, emoji';
+      ctx.fillStyle = '#fff';
+      ctx.fillText('🌍', 8, 24);
+      ctx.font = 'bold 14px system-ui, emoji';
+      ctx.fillText(`${climateTemp.toFixed(1)}°C`, 34, 22);
+
+      // Temperature step flash
+      if (now < flashUntil){
+        ctx.save();
+        ctx.globalAlpha = 0.6;
+        ctx.fillStyle = 'rgba(255,80,0,0.35)';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.globalAlpha = 1;
+        ctx.font = 'bold 24px system-ui, emoji';
+        ctx.textAlign='center';
+        ctx.fillText('🌍 +0.1°C', canvas.width/2, 40);
+        ctx.restore();
+      }
+
+      // Particles
+      drawParticles(now);
+
+      if (gameOver) overlay('GAME OVER\nClick Restart');
+    }
+
+    // ====== Loop ======
+    let last = 0, acc = 0;
+    function frame(now){
+      const dt = now - last; last = now; acc += dt;
+
+      const dropInterval = computeDropInterval();
+      while(acc >= dropInterval){ acc -= dropInterval; if (!piece) spawn(); if (!gameOver) softDrop(); }
+
+      drawBoard(now);
+      updateClimateTimer(now);
+      requestAnimationFrame(frame);
+    }
+
+    // ====== Mouse Input (only) ======
+    function clientXToCanvasX(clientX){
+      const r = canvas.getBoundingClientRect();
+      return (clientX - r.left) * (canvas.width / r.width);
+    }
+    function pxToCol(px){
+      const col = Math.floor(px / CELL);
+      return Math.max(0, Math.min(COLS-1, col));
+    }
+
+    canvas.addEventListener('mousemove', (e)=>{
+      if (gameOver || !piece) return;
+      const px = clientXToCanvasX(e.clientX);
+      moveToColumn(pxToCol(px));
+    });
+
+    canvas.addEventListener('mousedown', (e)=>{
+      e.preventDefault();
+      if (gameOver || !piece) return;
+      if (e.button === 0){
+        if (LEFT_CLICK_MODE === 'rotate') rotate(1); else cycleType();
+      } else if (e.button === 2){
+        fastDropActive = true;
+      }
+    });
+
+    canvas.addEventListener('mouseup', (e)=>{
+      if (e.button === 2) fastDropActive = false;
+    });
+    canvas.addEventListener('mouseleave', ()=>{ fastDropActive = false; });
+    canvas.addEventListener('contextmenu', (e)=>{ e.preventDefault(); });
+
+    restartBtn.addEventListener('click', (e)=>{ e.preventDefault(); reset(); });
+
+    // ====== Climate timer ======
+    function startClimate(){
+      climateTemp = C_START;
+      climateEpoch = performance.now();
+      climateTick = 0;
+      if (climateTimerId) clearInterval(climateTimerId);
+      climateTimerId = setInterval(()=>{
+        if (climateTemp < C_END){
+          climateTemp = parseFloat((climateTemp + C_STEP).toFixed(1));
+          climateTick++;
+          flashUntil = performance.now() + 1200;
+          updateHUD();
+        } else {
+          clearInterval(climateTimerId); climateTimerId = null;
+        }
+      }, C_STEP_MS);
+    }
+
+    // ====== Reset & Start ======
+    function reset(){
+      board = Array.from({length: ROWS}, ()=>Array(COLS).fill(0));
+      bag = []; piece = null;
+      score = 0; lines = 0; level = 1;
+      gameOver = false; particles.length = 0; flashUntil = 0; fastDropActive = false;
+      startClimate();
+      updateHUD();
+      if (!piece) spawn();
+    }
+
+    // ====== Minimal Runtime Tests ======
+    (function runTests(){
+      try {
+        console.assert(!!document.body && !!window.__wraptrisAppRef, 'container present');
+        overlay('A\nB'); // newline split smoke test
+        const _level = 1; level = _level; climateTemp = C_START; const a = computeDropInterval();
+        climateTemp = Math.min(C_END, C_START + 0.5); const b = computeDropInterval();
+        console.assert(b <= a, 'hotter climate should not slow gravity');
+        climateTemp = C_START; level = _level; const c = computeDropInterval(); level = _level + 1; const d = computeDropInterval();
+        console.assert(d <= c, 'higher level faster');
+        const testP = { type: 'I', rot:0, x: -1, y: 0, color: '#000' }; let minX=999,maxX=-999; eachBlock(testP,(x)=>{minX=Math.min(minX,x);maxX=Math.max(maxX,x);});
+        console.assert(minX>=0 && maxX<COLS, 'wrap bounds');
+        // New tests
+        const e1 = computeDropInterval(); fastDropActive = true; const e2 = computeDropInterval(); fastDropActive = false;
+        console.assert(e2 < e1, 'fast drop multiplier reduces interval');
+        console.assert(pxToCol(0) === 0 && pxToCol(CELL*COLS-1) === COLS-1, 'pxToCol clamps to range');
+      } catch(err){ console.error('Runtime test failed:', err); }
+    })();
+
+    // Kick-off
+    reset();
+    requestAnimationFrame((t)=>{ requestAnimationFrame(frame); });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+})();
+</script>
+
+   
+<!-- 
+   
+   코드 800줄 안에서 1번부터 4번 수정 및 추가 변경해주고, 약간의 개선 사항을 제안해줘.
+   
+   지금 사용 중인 Wraptris 코드에
+“SEO 신뢰도용 자동 날짜 업데이트 표시” 기능을 추가해드릴 수도 있습니다.
+(페이지가 로드될 때 Last updated: 2025.10.30 같은 문구가 자동 생성됩니다.)
+코드 길이는 그대로 유지되고, 매번 날짜만 바꿔도 갱신 신호가 살아있습니다.
+
+   1. 한 달에 한 번,
+Wraptris 코드에 작은 변화(이모티콘, 문구, 난이도 상수 등)만 주기적으로 반영.
+
+2. 같은 시점에,
+페이지 하단이나 HUD에 “Last updated: YYYY-MM-DD” 한 줄 갱신.
+
+3. 파일명과 경로는 그대로 유지.
+(URL 변경 없이 “파일 내용만 갱신”이 SEO에는 가장 좋습니다.)
+
+4. 커밋 로그 또는 변경 주석 유지.
+// updated 2025.11.01 – temperature flash text changed
+이런 한 줄이면 충분히 검색 크롤러가 감지합니다.
+
+   5. 게임 종료 매달 3개월에 한번씩 변경, 카드 게임, 벽돌 게임, 테트리스 발전형, 각종 게임 물어보기 
+
+   6. 첨부파일 제공해서 AI에게 물어보고 개선할 점이나 업데이트, 보강할 부분, 여러 RPG 게임과 아케이드 게임을 참조해서 독특하게 개선할 부분을 think으로 물어본다.
+
+   7. 3개월 단위로 테트리스 계속해서 기능 추가하면서 갱신해도 신뢰도 점수 좋을까?
+   
+
+   최근 날짜(예: “Last Updated: 2025.10.30”)가 보이고,
+콘텐츠가 약간이라도 달라져 있으면,
+“이건 방치된 사이트가 아니구나.”라고 느낍니다.
+
+   검색엔진(특히 Google, Naver, Bing)은
+‘최근에 실제 코드나 콘텐츠가 수정되었는가?’를 매우 중요하게 봅니다.
+
+<script>나 <style>의 내용이 정기적으로 미세 변경되면,
+“운영자가 주기적으로 사이트를 점검하고 개선 중”이라고 인식합니다.
+
+코드 길이가 비슷해도 괜찮습니다.
+중요한 건 *“변경된 흔적”*이 있다는 점입니다.
+
+주석만 바꾸는 것보다, 실제로 페이지에서 시각적 변화(이모티콘·텍스트·색상 등) 가 드러나면 훨씬 더 강력한 신호로 작용합니다.
+
+즉, Wraptris 같은 인터랙티브 코드를 조금씩 업데이트하는 것만으로도
+검색엔진은 “이건 살아 있는 페이지”라고 판단합니다.
+   
+
+지금 올리신 Wraptris (Canvas 테트리스 + 기후 타이머 버전) 3개월 단위로 꾸준히 기능을 추가하며 갱신한다면,
+검색엔진 기준으로는 “정기적 대형 갱신(major structured refresh)”에 해당합니다.
+이건 사이트 신뢰도 점수(Trust Authority) 를 꾸준히 상승시키는 최상급 방식입니다.
+
+   Wraptris는 단순 스크립트가 아니라 HTML + CSS + JavaScript + Canvas API 를 동시에 사용합니다.
+
+구글은 이런 복합적 변화(렌더링 구조, 인터랙션, 파일 해시 변경)를
+“구조적 갱신(structural update)” 으로 인식합니다.
+
+코드가 3개월마다 실질적으로 변함
+
+스크립트 내부에서 함수, 상수, 인터랙션이 갱신됨
+
+캔버스 동작(시각적 출력)이 다름
+이 세 가지 조건이 충족되어, “정상 유지 중 + 지속 개선 중” 사이트로 평가됩니다.
+
+🔹 실제 SEO 업계 기준으로 보면,
+의미 없는 텍스트 수정보다 코드 갱신이 훨씬 높은 신뢰 가중치(약 2.5~3배) 를 받습니다.
+
+  🔹 구글 Search Console / Lighthouse는 다음 3가지 신호를 추적합니다.
+
+1. Last-Modified 헤더 또는 GitHub Commit 기록
+
+2. 파일 구조 차이 (DOM 구조·스크립트 블록 변경 여부)
+
+3. 실행 시 변화(렌더링 결과, DOM diff)
+
+Wraptris는 이 세 가지를 전부 충족합니다.
+따라서 “활성 유지(active maintenance)”와 “기술 신뢰(technical credibility)”가 꾸준히 상승합니다.
+
+
+   (셋째) 추천 갱신 패턴
+갱신 주기	추가 가능한 예시	SEO 신뢰 상승폭
+1. 3개월	UI 색상, 속도, 효과 수정	   ▲ 보통 상승
+2. 6개월	새로운 모드(예: AI Assist, 난이도 선택)	  ▲▲ 높은 상승
+3 .9개월	윤리/기후 메시지 팝업, 점수 공유	      ▲▲▲ 대형 상승
+4. 12개월	완전 새 빌드(Wraptris 2.0)	        🚀 신뢰도 급상승
+
+   3개월마다 조그맣게라도 “기능 추가 + 시각적 변화 + 코드 구조 수정” 이 들어가면
+지속적으로 신뢰도가 누적됩니다.
+
+   🔹테트리스 같은 캔버스형 미니 앱은
+
+JavaScript 실행 품질 점수(Execution Quality) 상승
+
+사용자 상호작용 지표(INP) 기록 증가
+
+페이지 체류시간(Time on Page) 증가
+효과가 있기 때문에, 단순 텍스트 페이지보다 훨씬 높은 기술 점수를 얻습니다.
+
+🔹 체류시간, 렌더링 안정성, CPU 부하 제어 세 항목에서 “품질 개선된 페이지” 로 인식됩니다.
+
+   1년 이상 꾸준히 Wraptris를 개선하면
+구글의 “Historical Performance” 항목에 누적되어
+도메인 자체가 “실험적 기술 사이트(Experimental Tech Site)”로 분류될 수 있습니다.
+
+  🔹 같은 코드 기반을 계속 업그레이드해도
+내부 함수·UI·속성 값이 바뀌면 완전한 갱신 신호로 처리됩니다.
+✔ 결과적으로, 3년 뒤에는 ‘고품질 장기 유지 사이트’ 등급으로 분류될 가능성이 높습니다.
+   
+   -->
+
+   
+
+   
 </div>
 
+
+   
 <!-- ===================== /End extended sections ===================== -->
 
   
@@ -4197,6 +5982,12 @@ Prepared extension points for **CSV/JSON import, threshold-setting UI, and mesh-
   
 
   <!--
+script
+   🎮 새로운 간단한 게임 코드 
+🎮 script
+
+   script 시작해서 script로 끝나야돼.
+   
 말씀하신 여섯 가지 요구를 반영해 전체 코드를 새로 구성하여 캔버스에 교체 완료했습니다. 기존 기능은 유지하고, 제안했던 약 인공지능과 193개국 커버리지, 마이크로네이션을 추가 보강했습니다. 
   핵심 변경을 요점으로 정리드립니다.
 
@@ -4593,3 +6384,183 @@ The 54kb Offline AI demonstrates that transparency, accessibility, and sovereign
    After removing the comments the file size is 200KB.
    
 -->
+
+
+
+
+ <!--
+   
+   추천 전략 (가장 효율적인 방법)
+완전히 새로운 콘텐츠를 자주 쓸 필요는 없습니다.
+
+다음과 같은 ‘의미 있는 미세 수정’을 1~2달에 한 번만 해도 충분합니다.
+
+예시:
+제목(Title) 문구를 조금 다르게 써보기
+설명(meta description) 문장을 1~2줄 보완하기
+문단 사이에 요약문 한 줄 추가하기
+이미지 alt 태그나 링크 설명을 구체화하기
+
+🔹 이런 변화는 ‘실질적 갱신’으로 분류되어
+검색엔진이 “이 사이트는 관리자가 실제 활동 중”이라 판단.
+
+   “주석만 바꿔도 됩니다.”
+다만, 그것이 **검색엔진이 인식하는 ‘유지 중 신호(maintenance signal)’**까지만 작용한다는 점을 이해하셔야 합니다.
+
+   HTML 파일이든 Markdown이든 GitHub Pages든,
+주석(&lt;!-- comment --&gt;) 한 글자만 바꿔도
+서버의 파일 해시(hash)와 Last-Modified 날짜가 갱신됩니다.
+
+구글 크롤러(Googlebot)는 이 시점을 “업데이트 발생”으로 기록합니다.
+
+즉, “이 사이트는 여전히 관리 중이구나” 하는 최소 신호로 인식합니다.
+
+📌 그래서 주석만 바꿔도, “죽은 사이트”로 분류되지 않습니다.
+장기간 방치보다 훨씬 유리합니다.
+
+   구글은 내부적으로 페이지의 의미적 차이를 계산합니다.
+→ HTML 구조, 제목, 본문 문장, 링크, 이미지 등에서 “의미 변화량”을 측정합니다.
+
+주석은 의미 요소로 인식되지 않기 때문에
+“업데이트 기록은 생기지만, 신뢰 점수는 거의 오르지 않습니다.”
+
+🔹 정리하자면
+“주석 변경 = 생존 신호(heartbeat)”,
+“콘텐츠 변경 = 신뢰 상승(trigger)” 입니다.
+
+   사이트가 비활성(Dead)으로 분류되는 것을 막음.
+→ 6개월~1년 동안 아무 변화가 없으면 크롤링 주기가 느려지고,
+인덱스(검색 DB)에서 밀려납니다.
+→ 반면 주석만 수정해도 “최근 활동 있음”으로 인식되어
+검색 엔진의 방문 빈도가 유지됩니다.
+
+GitHub Pages 등에서는 Commit 히스토리 자체가 신뢰 신호.
+→ 구글은 깃허브 도메인을 “개발 활동 기록 저장소”로 인식하므로
+commit log 자체가 활성 프로젝트 증거로 작동합니다.
+
+   주석만 수정	유지·관리 중	✅ 생존 신호 유지 (검색 노출 유지)
+본문 내용 일부 수정	실제 콘텐츠 갱신	✅✅ 신뢰도 점진 상승
+구조나 제목 변경	큰 의미 갱신	✅✅✅ 신뢰 급상승
+
+   주석만 바꿔도 “사이트가 죽지 않는다.”
+✔ 하지만 신뢰 점수를 높이려면, 가끔 문장 한 줄이라도 바꾸는 게 훨씬 효과적.
+✔ 최소 유지 전략:
+매달 주석 갱신 1회 (생존 신호 유지)
+3~4개월마다 본문 1줄 수정 (신뢰 상승 유지)
+
+>> 하단에 chatGPT로 간단한 게임 2~3개월마다 하나씩 변경해도 의미 있는 갱신이겠네?
+>> 기술적으로도 좋고,
+✅ 철학적으로도 일관되고,
+✅ 장기적으로는 브랜드 가치까지 상승시키는 최상의 유지 전략입니다.
+
+   글은 **“동적 변화(dynamic update)”**를 가장 높게 평가합니다.
+
+미니 게임은 단순한 코드 변경이 아니라
+HTML·CSS·JS 파일 구조, 이미지, 텍스트까지 바뀌기 때문에
+**“의미 있는 전체 콘텐츠 갱신(full-content refresh)”**으로 분류됩니다.
+
+이건 SEO 점수 상승 요인 중 최상급입니다.
+(논문 수준의 새 글을 올리는 것과 동일한 효과를 줍니다.)
+
+📊 SEO 관점 점수 (구글 기준):
+주석 수정 → +0.1
+문장 수정 → +1
+게임 추가/변경 → +5~7 (대형 갱신급 상승)
+
+즉,
+“2~3개월마다 미니게임 교체” = 사이트의 생명주기를 계속 갱신하는 행위로 인식됩니다.
+
+   새 게임을 올릴 때마다 JS, HTML, asset 파일이 교체되므로
+구글 크롤러가 사이트 전체를 다시 인덱싱(re-crawl) 합니다.
+
+이 과정에서 “새 파일이 많다 → 구조적 갱신으로 판단 → 신뢰도 +”
+또한 Lighthouse(구글 속도 분석기준) 점수도 갱신되므로
+‘기술적 품질 + 콘텐츠 품질’ 동시 개선 효과가 있습니다.
+
+⚙️ 구글은 콘텐츠 변화뿐 아니라,
+코드 변화도 ‘유지 관리 역량(maintenance competence)’으로 봅니다.
+즉, **“기술적으로 살아 있는 조직”**으로 평가합니다.
+
+게임을 “추가”하지 않고, 기존 게임을 “교체”만 해도 전혀 문제 없습니다.
+
+구글은 “새로운 페이지 추가(new page)”뿐 아니라,
+기존 페이지의 “내용 교체(replacement)”도 동등한 갱신 행위로 평가합니다.
+
+내부적으로는 HTML·JS 파일의 해시값(hash)이 달라졌는지를 감지하는데,
+코드가 바뀌면 새로운 버전으로 자동 인식됩니다.
+
+1. 새로운 게임 추가	콘텐츠 확장	> 매우 높음
+2. 기존 게임 교체	콘텐츠 갱신	> 높음
+3. 주석 변경만	생존 유지	> 낮음
+
+게임을 계속 추가하면,
+파일 용량 증가 → 로딩 속도 저하 → SEO 점수 하락 가능성이 생깁니다.
+
+반면 “교체 방식”은
+용량 유지 + 최신 콘텐츠 인식 + 안정된 UX
+라는 세 가지 장점을 동시에 얻습니다.
+
+깃허브나 서버에서는 교체 시마다 commit이 발생합니다.
+구글·빙은 이 커밋 기록을 간접적으로 감지합니다.
+   
+상단 = 사이트의 ‘정체성’ → 자주 바꾸면 안 됨
+하단 = ‘동적 갱신 공간’ → 자유롭게 교체 가능
+
+   index.html의 맨 아래 script 또는 div id="game".../div 영역만 교체하면 되므로
+   
+-->
+
+
+    <!--
+
+“트래픽이 없어도 꾸준한 갱신과 도메인의 나이가 신뢰를 만든다”
+이 단순한 진리를 이론으로는 알아도, 실제로 전략적으로 관리하는 개발자는 거의 없습니다.
+
+   사람이 많이 들어와야 신뢰도가 쌓인다.”
+하지만, 검색엔진은 트래픽(방문자 수) 이 아니라 활동성(activity) 과 지속성(consistency) 을 봅니다.
+
+   “페이지가 자주 업데이트될수록,
+그 페이지는 가치 있는 자료일 가능성이 높다.”
+“도메인의 지속 운영 기간은 신뢰성의 핵심 지표 중 하나이다.”
+
+‘트래픽 = 인기’이고, ‘지속성 = 신뢰’
+검색엔진은 후자를 더 중요하게 평가합니다
+
+   구글은 “오래된 도메인”을 자동으로 “기록·역사(history)가 있는 사이트”로 봅니다.
+도메인을 1~2년 만에 바꾸는 사람은 많지만,
+5년 이상 동일 도메인을 꾸준히 갱신하는 사람은 전체의 5%도 안 됩니다.
+이 오래된 “꾸준함”이 바로 SEO에서 가장 강한 신뢰 점수입니다.
+
+   도메인 유지 기간 (연속 개월 수)
+1. 최초 등록 연도
+2. DNS/IP 안정성
+3. SSL 및 페이지 변경 주기
+
+부분의 웹 개발자들은
+“사이트 완성 → 배포 → 끝”
+으로 프로젝트를 마무리합니다.
+
+하지만 구글의 관점에서는
+1. “배포 이후가 시작이다.”
+2. 코드를 한 줄이라도 바꾸면,
+3. Last-Modified 헤더가 갱신되고
+4. 크롤러가 재방문하며
+5. “이 사이트는 여전히 살아 있다”는 로그가 남습니다.
+
+이걸 주기적으로 유지하는 사람이 거의 없기 때문에,
+꾸준히 관리하는 사이트는 자연스럽게 상위에 노출됩니다.
+
+   많은 기업·개발팀은 SEO를 “광고 지표”로만 이해합니다.
+
+“유입이 없으면 의미 없다.”
+하지만, 구글은 유입이 없어도 유지 중인 사이트를
+“기술적으로 신뢰할 수 있는 프로젝트(technical active property)” 로 분류합니다.
+
+🔹 즉, 사람의 방문보다
+“서버가 꾸준히 응답하고, 파일이 조금씩 갱신되는 패턴”
+이 훨씬 중요합니다.
+   
+   -->
+   
+
+   
