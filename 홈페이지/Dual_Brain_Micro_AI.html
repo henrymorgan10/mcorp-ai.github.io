@@ -29,6 +29,74 @@
 </div>
 
 
+<!-- M-Corp AI Goal — embeddable HTML fragment (no </html>) -->
+<section class="mcai-goal" role="region" aria-labelledby="mcai-goal-title">
+  <div class="mcai-goal-inner">
+    <span class="mcai-goal-badge" aria-hidden="true">Mission</span>
+    <h2 id="mcai-goal-title" class="mcai-goal-title">
+      M-Corp AI’s primary goal is to develop the world’s first GDPR-compliant AI sensor with a one-year battery life.
+    </h2>
+  </div>
+</section>
+
+<style>
+  /* Scoped styles (prefix: mcai-) to avoid collisions */
+  .mcai-goal { 
+    --mcai-bg: rgba(0, 122, 255, 0.06);
+    --mcai-border: rgba(0, 122, 255, 0.35);
+    --mcai-text: #0b1a33;
+    --mcai-badge-bg: #0b5fff;
+    --mcai-badge-text: #ffffff;
+    --mcai-shadow: 0 6px 18px rgba(11, 95, 255, 0.12);
+    position: relative; 
+    margin: 1.25rem auto; 
+    padding: 0; 
+    display: flex;
+    justify-content: center;
+  }
+  @media (prefers-color-scheme: dark) {
+    .mcai-goal { 
+      --mcai-bg: rgba(20, 60, 160, 0.18);
+      --mcai-border: rgba(120, 170, 255, 0.35);
+      --mcai-text: #eaf1ff;
+      --mcai-badge-bg: #6aa0ff;
+      --mcai-badge-text: #0b1a33;
+      --mcai-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+  }
+  .mcai-goal-inner {
+    display: grid; 
+    gap: 0.75rem; 
+    align-items: start; 
+    justify-items: start;
+    padding: 1.5rem; 
+    border-radius: 16px; 
+    background: var(--mcai-bg); 
+    border: 1px solid var(--mcai-border); 
+    box-shadow: var(--mcai-shadow);
+    max-width: 1000px; 
+    margin: 0 auto; 
+  }
+  .mcai-goal-badge { 
+    display: inline-block; 
+    font: 600 0.65rem/1.1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans", Apple SD Gothic Neo, "Malgun Gothic", sans-serif; 
+    letter-spacing: 0.04em; 
+    text-transform: uppercase; 
+    color: var(--mcai-badge-text); 
+    background: var(--mcai-badge-bg); 
+    border-radius: 999px; 
+    padding: 0.3rem 0.6rem; 
+    width: max-content;
+  }
+  .mcai-goal-title { 
+    margin: 0; 
+    font: 700 clamp(0.75rem, 2vw + 0.3rem, 1.1rem)/1.45 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans", Apple SD Gothic Neo, "Malgun Gothic", sans-serif; 
+    color: var(--mcai-text); 
+    letter-spacing: -0.01em; 
+    text-align: left;
+  }
+</style>
+
 
 
 <style>
@@ -907,7 +975,7 @@
 <div class="rsr-title">
   V0.1(mini) Refugee Self-Reliance Sovereign AI 🌐
   <span style="color:#1e90ff;">
-    This is an emoji-sized game (18 Kb) that contains a real-time micro offline AI.
+    This is an emoji-sized game (18 KB) that contains a real-time micro offline AI.
   </span>
 </div>
 
@@ -1241,7 +1309,7 @@ Together, they transform a simple offline demo into an AI that not only makes pr
   <div id="box" role="group">
     <header>
       <div class="title" id="title">
-        <a href="diplomacy(1).html" style="color:#0b77d5;text-decoration:underline">54kb Offline AI click</a>
+        <a href="diplomacy(1).html" style="color:#0b77d5;text-decoration:underline">54KB Offline AI click</a>
       </div>
       <div id="period">A world-class, ultra-lightweight on-device k-NN AI demo</div>
     </header>
@@ -1409,7 +1477,7 @@ Together, they transform a simple offline demo into an AI that not only makes pr
   const elN=document.getElementById('name'),elR=document.getElementById('rank'),elG=document.getElementById('grade'),elD=document.getElementById('desc'),elM=document.getElementById('more'),sr=document.getElementById('sr'),view=document.getElementById('view');
 
   // ==================== LABELS ====================
-  const LABELS={title:'54kb Offline AI click',moody:"Moody\'s 5yr avg",placeholder:'Country… (ex. America or USA)',risk:'Risk',choose:'Choose a country or press Risk.',sgrade:'Safety Grade',rank:'Tourism Rank #',micro:'Micronation',notun:'not a UN state',ai:'AI (k-NN + RLS) suggestion'};
+  const LABELS={title:'54KB Offline AI click',moody:"Moody\'s 5yr avg",placeholder:'Country… (ex. America or USA)',risk:'Risk',choose:'Choose a country or press Risk.',sgrade:'Safety Grade',rank:'Tourism Rank #',micro:'Micronation',notun:'not a UN state',ai:'AI (k-NN + RLS) suggestion'};
   elT.innerHTML=`<a href="diplomacy(1).html" style="color:#0b77d5;text-decoration:underline">${LABELS.title}</a>`;
   q.setAttribute('placeholder',LABELS.placeholder);
   riskBtn.textContent=LABELS.risk;
@@ -1953,7 +2021,7 @@ posterior sampling or by using the posterior mean to update UI risk values.
   }
   .briefing-box {
     font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    max-width: 360px;
+    max-width: 600px;
     border: 2px solid rgba(0, 0, 0, 0.12);
     border-radius: 14px;
     padding: 20px 22px;
@@ -2020,7 +2088,9 @@ posterior sampling or by using the posterior mean to update UI risk values.
   <div class="briefing-box" role="group" aria-label="Notes : Luxembourg 10-Minute Briefing Document">
     <h3 class="briefing-title">Luxembourg 10-Minute Briefing Document (only a tiny fraction)</h3>
     <p class="briefing-desc">
-      An ethical offline AI overview PDF aligned with EU standards — an EU-vetted ethical framework for non-commercial AI, explaining how an ultra-lightweight offline ethical AI can be applied in the field, as presented to the Government of Luxembourg. Click to open in a new tab.
+      An ethical offline AI overview PDF aligned with EU standards — an EU-vetted ethical framework for non-commercial AI, explaining how an ultra-lightweight offline ethical AI can be applied in the field, as presented to the Government of Luxembourg.
+      The Mouse/Refugee games demonstrate ultra-lightweight, adaptive AI designed to operate on solar-powered, off-grid devices. The Malaria/Ticker demos showcase “Numerical AI,” which uses only numbers and labels—no text—to minimize legal risks for NGOs. As explained in the Saving Lives with Ethical AI PDF, this method is used to accurately tally field resource needs such as food and medicine.
+      (This represents only a very small portion of the communications exchanged with the Government of Luxembourg.)
     </p>
     <div class="briefing-actions">
       <a
@@ -2044,6 +2114,8 @@ posterior sampling or by using the posterior mean to update UI risk values.
     </div>
   </div>
 </div>
+
+
 
 
 
